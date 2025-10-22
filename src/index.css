@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Top Luxury";
+  src: url("/fonts//TOPLUXURY.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --color-background: #e7e2ce;
+  --color-purple: #7e3c94;
+  --color-yellow: #c4a900;
+  --color-gray: #606060;
+  --font-top-luxury: "Top Luxury", sans-serif;
+}
+
+body {
+  @apply font-top-luxury bg-background;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCart } from '@/contexts/cartContext';
+import { Trash } from 'lucide-react';
 
 const Cart: React.FC = () => {
 	const { state, dispatch } = useCart();
@@ -73,13 +74,13 @@ const Cart: React.FC = () => {
 								</button>
 							</div>
 							<div className="text-sm font-semibold text-gray-800">
-								₹{(price * quantity).toFixed(2)}
+								{(price * quantity).toFixed(2)}AED
 							</div>
 							<button
 								onClick={() => remove(id)}
 								className="px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 text-xs"
 							>
-								Remove
+								<Trash/>
 							</button>
 						</div>
 					</div>

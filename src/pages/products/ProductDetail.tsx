@@ -2,6 +2,7 @@ import { Minus, Plus } from "lucide-react";
 import React, { useState } from "react";
 import { useCart } from "@/contexts/cartContext";
 import type { product } from "@/types/products";
+import { toast } from "react-toastify";
 
 interface ProductDetailProps {
   name: string;
@@ -28,6 +29,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   const { dispatch } = useCart()
 
   const handleAddToCart = (product: Omit<product, 'description' | 'reviews' | 'type'>) => {
+    toast.success('Product added to cart', {
+      style: {
+        backgroundColor: '#7e3c94',
+        color: '#fff',
+      }
+    })
     dispatch({
       type: 'ADD_ITEM',
       payload: {

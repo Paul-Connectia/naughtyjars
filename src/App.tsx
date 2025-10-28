@@ -6,6 +6,8 @@ import { Suspense, lazy } from "react";
 import Login from "./pages/auth/login";
 import Cart from "./pages/Cart";
 import { CartProvider } from "./contexts/cartContext";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // ✅ Lazy load components for better performance
 const Layout = lazy(() => import("@/layout/Layout"));

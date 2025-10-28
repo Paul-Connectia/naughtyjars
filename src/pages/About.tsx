@@ -1,5 +1,6 @@
 import Subscribe from "@/components/about/Subscribe";
 import Team from "@/components/about/Team";
+import StatsCircles from "@/components/StatsCircles";
 import Image from "@/components/ui/Image";
 import Head from "@/layout/Head";
 import MaxContainer from "@/layout/MaxContainer";
@@ -82,7 +83,7 @@ export default function About() {
             consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
             velit esse molestie.
           </p>
-          <MaxContainer className="my-10 flex max-w-2xl flex-col items-center justify-center text-center sm:flex-row sm:justify-between">
+          {/* <MaxContainer className="my-10 flex max-w-2xl flex-col items-center justify-center text-center sm:flex-row sm:justify-between">
             {[
               {
                 value: "87%",
@@ -116,7 +117,10 @@ export default function About() {
                 </div>
               </div>
             ))}
-          </MaxContainer>
+          </MaxContainer> */}
+          <div className="py-4">
+            <StatsCircles />
+          </div>
         </MaxContainer>
 
         <Team />

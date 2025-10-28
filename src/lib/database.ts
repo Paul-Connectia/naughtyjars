@@ -2,7 +2,7 @@ export const data = [
   {
     name: "Box of Orginal Jars (250ml x 5)",
     price: 180,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "classic-tiramisu",
     weight: "250ml X 5",
     type: "box",
@@ -13,7 +13,7 @@ export const data = [
   {
     name: "Box of Pistachio Jars (500ml x 5)",
     price: 180,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "pistachio-tiramisu",
     weight: "150ml X 9",
     type: "box",
@@ -23,7 +23,7 @@ export const data = [
   {
     name: "Classic Tiramisu",
     price: 180,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "classic-tiramisu",
     weight: "500ml",
     type: "large",
@@ -34,7 +34,7 @@ export const data = [
   {
     name: "Pistachio Tiramisu",
     price: 180,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "pistachio-tiramisu",
     weight: "500ml",
     type: "large",
@@ -45,7 +45,7 @@ export const data = [
   {
     name: "Lotus Biscoff Tiramisu",
     price: 180,
-    images: ["/public/sjhd.png"],
+    images: ["/sjhd.png"],
     slug: "lotus-biscoff-tiramisu",
     weight: "500ml",
     type: "large",
@@ -55,7 +55,7 @@ export const data = [
   {
     name: "Ferrero Rocher Tiramisu",
     price: 180,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "ferrero-rocher-tiramisu",
     weight: "500ml",
     type: "large",
@@ -65,7 +65,7 @@ export const data = [
   {
     name: "Date & Qahwa Tiramisu",
     price: 180,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "date-qahwa-tiramisu",
     weight: "500ml",
     type: "large",
@@ -75,7 +75,7 @@ export const data = [
   {
     name: "Classic Tiramisu",
     price: 90,
-    images: ["/public/nhs.png", "/public/sjhd.png"],
+    images: ["/nhs.png", "/sjhd.png"],
     slug: "classic-tiramisu",
     weight: "250ml",
     type: "small",
@@ -86,7 +86,7 @@ export const data = [
   {
     name: "Pistachio Tiramisu",
     price: 90,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "pistachio-tiramisu",
     weight: "250ml",
     type: "small",
@@ -97,7 +97,7 @@ export const data = [
   {
     name: "Lotus Biscoff Tiramisu",
     price: 90,
-    images: ["/public/sjhd.png"],
+    images: ["/sjhd.png"],
     slug: "lotus-biscoff-tiramisu",
     weight: "250ml",
     type: "small",
@@ -107,7 +107,7 @@ export const data = [
   {
     name: "Ferrero Rocher Tiramisu",
     price: 90,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "ferrero-rocher-tiramisu",
     weight: "250ml",
     type: "small",
@@ -117,7 +117,7 @@ export const data = [
   {
     name: "Date & Qahwa Tiramisu",
     price: 90,
-    images: ["/public/nhs.png"],
+    images: ["/nhs.png"],
     slug: "date-qahwa-tiramisu",
     weight: "250ml",
     type: "small",

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "../ui/Image";
+import slide1 from '@/assets/carousel1.png'
+import slide2 from '@/assets/carousel2.jpg'
+import slide3 from '@/assets/carousel3.jpg'
 
 interface Slide {
 	id: number;
@@ -12,9 +15,9 @@ interface Props {
 }
 
 const slides: Slide[] = [
-	{ id: 1, image: "/src/assets/carousel1.png", text: "Slide 1" },
-	{ id: 2, image: "/src/assets/carousel2.jpg", text: "Slide 2" },
-	{ id: 3, image: "/src/assets/carousel3.jpg", text: "Slide 3" },
+	{ id: 1, image: slide1, text: "Slide 1" },
+	{ id: 2, image: slide2, text: "Slide 2" },
+	{ id: 3, image: slide3, text: "Slide 3" },
 ];
 
 const Carousel: React.FC<Props> = ({ dashes = false }) => {

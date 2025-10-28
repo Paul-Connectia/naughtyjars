@@ -12,9 +12,9 @@ interface Props {
 }
 
 const slides: Slide[] = [
-	{ id: 1, image: "/home.png", text: "Slide 1" },
-	{ id: 2, image: "/home.png", text: "Slide 2" },
-	{ id: 3, image: "/home.png", text: "Slide 3" },
+	{ id: 1, image: "/src/assets/carousel1.png", text: "Slide 1" },
+	{ id: 2, image: "/src/assets/carousel2.jpg", text: "Slide 2" },
+	{ id: 3, image: "/src/assets/carousel3.jpg", text: "Slide 3" },
 ];
 
 const Carousel: React.FC<Props> = ({ dashes = false }) => {

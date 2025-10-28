@@ -1,4 +1,4 @@
-import Image from "../ui/Image";
+
 
 export default function BehindScene() {
   return (
@@ -14,11 +14,12 @@ export default function BehindScene() {
         Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
         molestie.
       </p>
-      <Image
-        src="/video.png"
-        alt="Behind the Scenes"
-        className="mt-10 w-full rounded-xl object-cover"
-      />
+      <video
+        src="https://res.cloudinary.com/dxzjwpf46/video/upload/v1761583289/NJ_Reel_06_iqyw9q.mp4"
+        className="h-full w-full object-cover sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px]"
+        autoPlay
+        muted
+      ></video>
     </div>
   );
 }

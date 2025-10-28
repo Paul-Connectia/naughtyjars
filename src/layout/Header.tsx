@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const menus = [
   { title: "home", href: "/" },
+  { title: "products", href: "/products/1" },
   { title: "about us", href: "/about-us" },
   { title: "blogs", href: "/blogs" },
 ];
@@ -61,8 +62,12 @@ function ButtonGroup() {
   return (
     <div className="flex items-center gap-5 text-white sm:gap-8">
       <Search strokeWidth={1.5} />
-      <User strokeWidth={1.5} />
-      <ShoppingBag strokeWidth={1.5} />
+      <Link to={'/login'}>
+        <User strokeWidth={1.5} />
+      </Link>
+      <Link to={'/cart'}>
+        <ShoppingBag strokeWidth={1.5} />
+      </Link>
     </div>
   );
 }

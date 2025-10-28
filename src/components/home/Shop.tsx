@@ -1,6 +1,11 @@
 import MaxContainer from "@/layout/MaxContainer";
+import { Link } from "react-router-dom";
 
-const dummyImages = ["/nhs.png", "/nhss.png", "/sjhd.png"];
+const dummyImages = [
+  { img: "/nhs.png", page: "/products/1", label: "Original Jars (250ml)" },
+  { img: "/nhss.png", page: "/products/2", label: "Petite Jars (500ml)" },
+  { img: "/sjhd.png", page: "/products/3", label: "Combo Boxes" },
+];
 
 export default function Shop() {
   return (
@@ -16,25 +21,31 @@ export default function Shop() {
       </p>
 
       <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-8 md:grid-cols-3 md:gap-10">
-        {dummyImages.map((img, index) => (
+        {dummyImages.map((item, index) => (
           <div className="w-full text-center" key={index}>
-            <div
-              className="mb-3 w-full"
-              style={{
-                paddingBottom: "100%",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <img
-                src={img}
-                alt={`Product ${index + 1}`}
-                className="hover:scale-[1.15] absolute top-0 left-0 h-full w-full object-cover transition-transform duration-500 ease-in-out"
-              />
-            </div>
-            <button className="bg-yellow rounded-3xl px-5 py-1.5 text-lg text-white sm:px-8 cursor-pointer hover:bg-yellow-800/75 transition-colors duration-300">
-              Shop Now
-            </button>
+            <Link to={item.page} className="group block">
+              <div
+                className="relative mb-3 w-full overflow-hidden"
+                style={{ paddingBottom: "100%" }}
+              >
+                <img
+                  src={item.img}
+                  alt={`Product ${index + 1}`}
+                  className="absolute top-0 left-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-[1.15]"
+                />
+
+                {/* ✅ Label overlay now visible on hover */}
+                <div className="absolute bottom-0 left-0 flex w-full items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="w-full bg-yellow-800/85 py-2 font-semibold text-white">
+                    {item.label}
+                  </span>
+                </div>
+              </div>
+
+              <button className="bg-yellow cursor-pointer rounded-3xl px-5 py-1.5 text-lg text-white transition-colors duration-300 hover:bg-yellow-800/75 sm:px-8">
+                Shop Now
+              </button>
+            </Link>
           </div>
         ))}
       </div>

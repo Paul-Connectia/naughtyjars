@@ -8,11 +8,12 @@ export default function About() {
   return (
     <>
       <Head title="About Us | Naughty Jars - Desserts & Beyond" />
-      <Image
-        src="/naughty.png"
-        alt="Banner Hero"
-        className="h-[550px] w-full object-cover sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px]"
-      />
+      <video
+        src="https://res.cloudinary.com/dxzjwpf46/video/upload/v1761581609/NJ_Reel_03_yspo8s.mp4"
+        className="h-full w-full object-cover sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px]"
+        autoPlay
+        muted
+      ></video>
 
       <MaxContainer className="px-5 py-12 sm:px-8 md:px-10">
         <h2 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
@@ -83,17 +84,32 @@ export default function About() {
           </p>
           <MaxContainer className="my-10 flex max-w-2xl flex-col items-center justify-center text-center sm:flex-row sm:justify-between">
             {[
-              { value: "87%", label: "Satisfied Customers" },
-              { value: "93%", label: "Organic Customers" },
-              { value: "83%", label: "Skilled Staff" },
+              {
+                value: "87%",
+                label: "Satisfied Customers",
+                animation: "animate-bounce",
+              },
+              {
+                value: "93%",
+                label: "Organic Customers",
+                animation: "animate-pulse",
+              },
+              {
+                value: "83%",
+                label: "Skilled Staff",
+                animation: "animate-bounce",
+              },
             ].map((item, idx) => (
               <div key={idx} className="mb-4">
                 <div
-                  className={`hover-scale border-purple text-purple flex flex-col items-center justify-center rounded-full border ${
-                    idx !== 1 ? "size-[150px] text-xl" : "size-[180px] text-xl"
-                  }`}
+                  className={`border-purple text-purple flex flex-col items-center justify-center rounded-full border ${idx !== 1
+                    ? "h-[150px] w-[150px] text-xl"
+                    : "h-[180px] w-[180px] text-xl"
+                    }`}
                 >
-                  <span className={idx !== 1 ? "text-3xl" : "text-4xl"}>
+                  <span
+                    className={`${idx !== 1 ? "text-3xl" : "text-4xl"} ${item.animation} `}
+                  >
                     {item.value}
                   </span>
                   <span>{item.label}</span>

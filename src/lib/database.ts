@@ -49,7 +49,7 @@ export const data = [
     slug: "lotus-biscoff-tiramisu-150ml",
     weight: "150ml",
     type: "large",
-    description:  "Smooth layers infused with the goodness of Lotus Biscoff.\nFerrero Rocher Tiramisu – Rich hazelnut and chocolate indulgence.\nDate & Qahwa Tiramisu – Arabian flavors of dates and aromatic coffee.",
+    description:  "Smooth layers infused with the goodness of Lotus Biscoff.",
     reviews: 4.2,
   },
   {
@@ -59,7 +59,7 @@ export const data = [
     slug: "ferrero-rocher-tiramisu-150ml",
     weight: "150ml",
     type: "large",
-    description: "Nutty Pistachio flavor Tiramisu with soft texture.",
+    description: "Rich hazelnut and chocolate indulgence.",
     reviews: 4.2,
   },
   {
@@ -69,7 +69,7 @@ export const data = [
     slug: "date-qahwa-tiramisu-150ml",
     weight: "150ml",
     type: "large",
-    description: "Nutty Pistachio flavor Tiramisu with soft texture.",
+    description: " Arabian flavors of dates and aromatic coffee.",
     reviews: 4.2,
   },
   {
@@ -101,7 +101,7 @@ export const data = [
     slug: "lotus-biscoff-tiramisu-250ml",
     weight: "250ml",
     type: "small",
-    description: "Smooth layers infused with the goodness of Lotus Biscoff.\nFerrero Rocher Tiramisu – Rich hazelnut and chocolate indulgence.\nDate & Qahwa Tiramisu – Arabian flavors of dates and aromatic coffee.",
+    description: "Smooth layers infused with the goodness of Lotus Biscoff. ",
     reviews: 4.2
   },  
   {
@@ -111,7 +111,7 @@ export const data = [
     slug: "ferrero-rocher-tiramisu-250ml",
     weight: "250ml",
     type: "small",
-    description: "Nutty Pistachio flavor Tiramisu with soft texture.",
+    description: " Rich hazelnut and chocolate indulgence.",
     reviews: 4.2,
   },
   {
@@ -121,7 +121,7 @@ export const data = [
     slug: "date-qahwa-tiramisu-250ml",
     weight: "250ml",
     type: "small",
-    description: "Nutty Pistachio flavor Tiramisu with soft texture.",
+    description: "Arabian flavors of dates and aromatic coffee.",
     reviews: 4.2,
   },
 ];

@@ -62,9 +62,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
               <img
                 src={img}
                 alt={`${name} ${idx}`}
-                className={`h-25 w-25 cursor-pointer rounded border object-cover transition hover:scale-105 ${
-                  img === mainImage ? "border-yellow-500" : "border-gray-300"
-                }`}
+                className={`h-25 w-25 cursor-pointer rounded border object-cover transition hover:scale-105 ${img === mainImage ? "border-yellow-500" : "border-gray-300"
+                  }`}
               />
               {idx === 2 && (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -108,7 +107,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           <p className="font-medium text-gray-700">Weight: {weight}</p>
 
           {/* Price */}
-          <p className="mt-2 inline-block rounded-full bg-yellow-400 px-3 py-1 text-white">
+          <p className="mt-2 inline-block rounded-full bg-yellow px-3 py-1 w-fit text-white">
             {price} AED
           </p>
 
@@ -159,7 +158,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                   className="mt-1 ml-1 h-8 w-8 object-contain"
                 />
               </div>
-              <span className="rounded-3xl bg-yellow-400 px-5 py-2 font-semibold text-white transition hover:bg-yellow-600">
+              <span className="rounded-3xl bg-yellow px-5 py-2 font-semibold text-white transition hover:bg-yellow-800/80">
                 Order on WhatsApp
               </span>
             </div>

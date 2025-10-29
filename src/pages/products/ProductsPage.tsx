@@ -46,7 +46,7 @@ const ProductsPage: React.FC = () => {
               <div className="relative z-10 bg-[#ebe7d2] p-4">
                 <h3 className="text-lg font-semibold">{p.name}</h3>
                 <div className="">
-                  <p className="mt-2 inline-block rounded-full bg-yellow-400 px-3 py-1 text-white">
+                  <p className="mt-2 inline-block rounded-full bg-yellow px-3 py-1 text-white">
                     {p.price} AED
                   </p>
                 </div>

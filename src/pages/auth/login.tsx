@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { loginUser } from "../../api/user";
-import { useNavigate } from "react-router-dom";
+// import { loginUser } from "../../api/user";
+import { useNavigate } from "react-router";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -13,25 +13,24 @@ const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
+  
+  //   try {d
+  //     const data = await loginUser(email, password); 
+  //     const { token, user } = data;
 
-    try {
-      const data = await loginUser(email, password); 
-      const { token, user } = data;
+  //     localStorage.setItem("token", token);
+  //     localStorage.setItem("user", JSON.stringify(user));
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-
-      // Redirect based on role
-      if (user.role === "admin") navigate("/admin-dashboard");
-      else if (user.role === "crew") navigate("/crew-dashboard");
-      else navigate("/customer-dashboard");
-    } catch (err: any) {
-      console.error(err);
-      setError(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     // ✅ Redirect logic
+  //     if (user.role === "crew") navigate("/crew-dashboard");
+  //     else navigate("/");
+  //   } catch (err: any) {
+  //     console.error(err);
+  //     setError(err.response?.data?.message || "Login failed");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+   };
 
   return (
     <div className="h-[75vh] flex items-center justify-center">

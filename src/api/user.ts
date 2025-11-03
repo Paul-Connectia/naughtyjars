@@ -1,12 +1,14 @@
 import axios from "axios";
 
-const API_URL = process.env.API_URL +"/auth"; 
+const API_URL = process.env.API_URL + "/auth"; 
 
+// Login API
 export const loginUser = async (email: string, password: string) => {
   const response = await axios.post(`${API_URL}/login`, { email, password });
-  return response.data;
+  return response.data; 
 };
 
+// Register API (optional)
 export const registerUser = async (username: string, email: string, password: string) => {
   const response = await axios.post(`${API_URL}/register`, {
     username,
@@ -16,6 +18,7 @@ export const registerUser = async (username: string, email: string, password: st
   return response.data;
 };
 
+// Get all users (admin only)
 export const getAllUsers = async (token: string) => {
   const response = await axios.get(`${API_URL}/`, {
     headers: { Authorization: `Bearer ${token}` },

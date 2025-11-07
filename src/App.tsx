@@ -15,7 +15,11 @@ const ProductsPage = lazy(() => import("@/pages/products/ProductsPage"));
 const ProductDetailPage = lazy(() => import("@/pages/products/ProductDetailPage"));
 const About = lazy(() => import("./pages/About"));
 const Blog = lazy(() => import("./pages/Blog"));
-const CrewDashboard = lazy(() => import("./pages/crew/CrewDashboard"));
+const AdminLayout = lazy(() => import("@/admin/layout/AdminLayout"));
+const AdminDashboard = lazy(() => import("@/admin/pages/Dashboard"));
+const CrewList = lazy(() => import("./admin/pages/CrewList"));
+const AddCrew = lazy(() => import("./admin/pages/AddCrew"));
+const Settings= lazy(()=>import("./admin/pages/Setting"))
 
 // ✅ Define routes
 const router = createBrowserRouter([
@@ -29,10 +33,20 @@ const router = createBrowserRouter([
       { path: "/blogs", element: <Blog /> },
       { path: "/login", element: <Login /> },
       { path: "/cart", element: <Cart /> },
-      { path: "/crew-dashboard", element: <CrewDashboard /> },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      { path: "crew", element: <CrewList /> },
+      { path: "crew/add", element: <AddCrew /> },
+      {path: "settings", element: <Settings/>}
     ],
   },
 ]);
+
 
 // ✅ App component
 export default function App() {
@@ -44,3 +58,16 @@ export default function App() {
     </Suspense>
   );
 }
+
+// const isAdmin = true;
+
+// {
+//   path: "/admin",
+//   element: isAdmin ? <AdminLayout /> : <Navigate to="/login" />,
+//   children: [
+//     { index: true, element: <AdminDashboard /> },
+//     { path: "crew", element: <CrewList /> },
+//     { path: "crew/add", element: <AddCrew /> },
+//   ],
+// }
+

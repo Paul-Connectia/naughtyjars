@@ -14,10 +14,10 @@ export default function Shop() {
         Shop Online
       </h4>
       <p className="text-gray ml-3 max-w-5xl text-justify text-base leading-relaxed sm:ml-5 md:text-lg">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-        nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-        volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+        Discover indulgence at your fingertips !
+        <br />
+        Explore our curated collection, select your favourites, and have our
+        signature delights delivered fresh to your door.
       </p>
 
       <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-8 md:grid-cols-3 md:gap-10">

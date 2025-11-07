@@ -21,19 +21,24 @@ export default function About() {
           about us
         </h2>
         <p className="text-gray ml-4 text-justify text-base leading-relaxed sm:text-lg">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed diam
-          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-          volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-          Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-          molestie.
+          At Naughty Jars, our mission is to turn every jar into a small work of
+          art layered with flavor, passion, and precision. Inspired by Italian
+          traditions and reimagined for Dubai’s dessert lovers, we craft
+          tiramisu in a cloud kitchen that guarantees freshness, consistency,
+          and care in every batch.
+          <br />
+          Using premium ingredients and creative combinations, we bring you
+          unique flavors like Date and Qahwa, Lotus Biscoff, Ferrero Rocher and
+          Pistachio, all handcrafted with love. Each jar reflects our commitment
+          to quality and indulgence, made for those who appreciate the finer
+          things in life.
         </p>
 
         <div className="relative mx-auto mt-10">
           <div className="mx-auto grid max-w-4xl grid-cols-4 sm:h-[350px]">
             <Image src="/about/1.avif" />
             <p className="absolute top-3 left-10 bg-[#f1dab0] p-1 text-center sm:left-60 sm:w-40 sm:p-3">
-              Lorem ipsum
+              Pure indulgence
             </p>
             <Image src="/about/2.avif" className="mt-5" />
             <div className="-z-20 -mt-5 h-[200px] bg-[#EDEAAAff] sm:h-[350px] sm:p-5">
@@ -48,15 +53,14 @@ export default function About() {
           </div>
           <div className="mx-auto grid max-w-4xl grid-cols-4 sm:h-[350px]">
             <p className="-mt-10 flex flex-col bg-[#f1dab0] p-1 text-center text-xs sm:h-full sm:w-52 sm:p-5 sm:text-base">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ad
-              labore
+              Nothing less than perfection in every jar
             </p>
             <Image src="/about/4.avif" />
             <Image src="/about/5.avif" className="-z-10" />
             <div className="relative">
               <Image src="/about/6.avif" className="-z-10 -mt-10" />
               <div className="absolute bottom-2 left-5 -ml-20 w-40 bg-[#d2b58d] p-1 text-xs sm:ml-0 sm:p-5">
-                Lorem, ipsum dolor sit amet
+                Flavors built to impress
               </div>
             </div>
           </div>
@@ -76,12 +80,7 @@ export default function About() {
             Why Choose Us
           </h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-            volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-            consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-            velit esse molestie.
+          Loved by customers and crafted by skilled staff, every jar reflects our passion for quality and flavor. From the first layer to the last bite, we make sure every dessert experience is nothing short of exceptional.
           </p>
           {/* <MaxContainer className="my-10 flex max-w-2xl flex-col items-center justify-center text-center sm:flex-row sm:justify-between">
             {[

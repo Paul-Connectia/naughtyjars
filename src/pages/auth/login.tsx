@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { loginUser } from "../../api/user";
+import { loginUser } from "../../api/auth";
 import { useNavigate } from "react-router";
 
 const Login: React.FC = () => {
@@ -14,22 +14,22 @@ const Login: React.FC = () => {
     setLoading(true);
     setError("");
   
-  //   try {d
-  //     const data = await loginUser(email, password); 
-  //     const { token, user } = data;
+    try {
+      const data = await loginUser(email, password); 
+      const { token, user } = data;
 
-  //     localStorage.setItem("token", token);
-  //     localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
 
-  //     // ✅ Redirect logic
-  //     if (user.role === "crew") navigate("/crew-dashboard");
-  //     else navigate("/");
-  //   } catch (err: any) {
-  //     console.error(err);
-  //     setError(err.response?.data?.message || "Login failed");
-  //   } finally {
-  //     setLoading(false);
-  //   }
+      // ✅ Redirect logic
+      if (user.role === "crew") navigate("/crew-dashboard");
+      else navigate("/");
+    } catch (err: any) {
+      console.error(err);
+      setError(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
    };
 
   return (

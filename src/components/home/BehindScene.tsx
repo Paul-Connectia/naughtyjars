@@ -1,5 +1,3 @@
-
-
 export default function BehindScene() {
   return (
     <div className="px-5 py-10 sm:px-8 md:px-10">
@@ -7,12 +5,13 @@ export default function BehindScene() {
         Behind the Scenes
       </h4>
       <p className="text-gray max-w-5xl pl-3 text-left text-base leading-relaxed sm:pl-5 md:text-lg">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-        nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-        volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-        molestie.
+        Step into our kitchen and see where the magic happens. Every tiramisu
+        jar begins with high-quality ingredients, layered by hand, and finished
+        with precision.
+        <br />
+        Our video takes you behind the scenes, showing how passion and craft
+        come together in every step. From mixing mascarpone to sealing each jar,
+        we believe in creating desserts with honesty and care.
       </p>
       <video
         src="https://res.cloudinary.com/dxzjwpf46/video/upload/v1761583289/NJ_Reel_06_iqyw9q.mp4"

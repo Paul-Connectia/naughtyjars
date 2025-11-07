@@ -20,7 +20,7 @@ export default function About() {
         <h2 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
           About Us
         </h2>
-        <p className="text-gray ml-4 text-justify text-base leading-relaxed sm:text-lg">
+        <p className="text-gray max-w-5xl text-left text-base leading-relaxed  md:text-lg ">
           At Naughty Jars, our mission is to turn every jar into a small work of
           art layered with flavor, passion, and precision. Inspired by Italian
           traditions and reimagined for Dubai’s dessert lovers, we craft

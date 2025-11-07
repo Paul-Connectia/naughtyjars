@@ -4,7 +4,7 @@ export default function BehindScene() {
       <h4 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
         Behind the Scenes
       </h4>
-      <p className="text-gray max-w-5xl pl-3 text-left text-base leading-relaxed sm:pl-5 md:text-lg">
+      <p className="text-gray max-w-5xl text-left text-base leading-relaxed  md:text-lg mb-4">
         Step into our kitchen and see where the magic happens. Every tiramisu
         jar begins with high-quality ingredients, layered by hand, and finished
         with precision.
@@ -15,7 +15,7 @@ export default function BehindScene() {
       </p>
       <video
         src="https://res.cloudinary.com/dxzjwpf46/video/upload/v1761583289/NJ_Reel_06_iqyw9q.mp4"
-        className="h-full w-full object-cover sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px]"
+        className="h-full w-full object-cover sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px] mt-10"
         autoPlay
         muted
       ></video>

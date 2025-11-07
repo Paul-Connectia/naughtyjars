@@ -13,7 +13,7 @@ export default function Shop() {
       <h4 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
         Shop Online
       </h4>
-      <p className="text-gray ml-3 max-w-5xl text-justify text-base leading-relaxed sm:ml-5 md:text-lg">
+      <p className="text-gray max-w-5xl text-left text-base leading-relaxed  md:text-lg ">
         Discover indulgence at your fingertips !
         <br />
         Explore our curated collection, select your favourites, and have our

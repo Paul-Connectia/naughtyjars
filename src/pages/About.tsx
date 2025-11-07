@@ -18,7 +18,7 @@ export default function About() {
 
       <MaxContainer className="px-5 py-12 sm:px-8 md:px-10">
         <h2 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
-          about us
+          About Us
         </h2>
         <p className="text-gray ml-4 text-justify text-base leading-relaxed sm:text-lg">
           At Naughty Jars, our mission is to turn every jar into a small work of

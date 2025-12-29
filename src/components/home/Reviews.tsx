@@ -5,18 +5,18 @@ import Image from "../ui/Image";
 const reviews = [
   {
     id: 1,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea co",
-    author: "Full Name",
+    text: "Serradura is a Portuguese dessert made with layers of crushed biscuits and sweet cream, creating a delightful, creamy, and crunchy treat. This one was amazingly made by Naughty Jars",
+    author: "Anu Eliza",
   },
   {
     id: 2,
-    text: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
-    author: "Jane Smith",
+    text: "I just served the tiramisu to my guests. They loved it. We liked how balanced the coffee and the cream tasted, how it wasn’t extra sugary.Nobody stopped at a single serving and everyone had a mild smile on their face after eating it. Many compliments and many thanks to you for getting this done so quickly and I can’t wait to reorder.",
+    author: "Kanav Minocha",
   },
   {
     id: 3,
-    text: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.",
-    author: "John Doe",
+    text: "The best tiramisu in the whole of UAE",
+    author: "Ketaki Golatkar",
   },
 ];
 

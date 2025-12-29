@@ -5,12 +5,14 @@ import Image from "@/components/ui/Image";
 import Pagination from "@/components/products/Pagination";
 import { data } from "@/lib/database"
 import type { product } from "@/types/products";
+import dirham from '@/assets/UAE_Dirham_Symbol.svg'
 
 
 const ProductsPage: React.FC = () => {
 
-  const typeArr = ['large', 'small', 'box']
-  const titleArr = ['Original Jars(250ml)', 'Petite Jars(150ml)', 'Combo Boxes']
+  const typeArr = ['large', 'small', 'box', 'casserole'];
+  const titleArr = ['Original Jars(250ml)', 'Petite Jars(150ml)', 'Combo Boxes', 'Casseroles'];
+
 
   const { id } = useParams<{ id: string }>()
   const products: product[] = data.filter(product => product.type === typeArr[Number(id) - 1])
@@ -46,8 +48,13 @@ const ProductsPage: React.FC = () => {
               <div className="relative z-10 bg-[#ebe7d2] p-4">
                 <h3 className="text-lg font-semibold">{p.name}</h3>
                 <div className="">
-                  <p className="mt-2 inline-block rounded-full bg-yellow px-3 py-1 text-white">
-                    {p.price} AED
+                  <p className="mt-2 inline-flex items-center gap-1 rounded-full bg-yellow px-3 py-1 text-white">
+                    <img
+                      src={dirham}
+                      alt="Dirham"
+                      className="w-4 h-4 pb-0.5 fill-current"
+                    />
+                    {p.price}
                   </p>
                 </div>
               </div>

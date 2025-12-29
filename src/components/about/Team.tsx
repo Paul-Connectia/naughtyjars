@@ -24,6 +24,7 @@ export default function Team() {
       <h4 className="text-gray mb-10 text-3xl md:text-4xl lg:text-5xl">
         Meet The Team
       </h4>
+      <p className="mb-10">"Naughty jars was born out of my love for authentic Tiramisu made with quality ingredients. My search for a perfectly balanced tiramisu ended when I finally mastered the recipe after a year of experimenting. I am delighted to share this recipe in our carefully crafted jars of the classic tiramisu and a list of growing flavour variations” -<span className="font-bold"> Moona Menez - Founder, Naughty Jars </span></p>
       <div className="flex gap-5 sm:gap-8 md:gap-10">
         {teams.map((t, idx) => (
           <div

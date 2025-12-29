@@ -80,7 +80,7 @@ export default function About() {
             Why Choose Us
           </h4>
           <p>
-          Loved by customers and crafted by skilled staff, every jar reflects our passion for quality and flavor. From the first layer to the last bite, we make sure every dessert experience is nothing short of exceptional.
+          We are committed to creating tiramisu that stands apart, beginning with high-quality ingredients sourced for their freshness and flavor. Every jar is carefully handcrafted by our skilled team, bringing together smooth mascarpone, bold coffee, and signature twists like pistachio, qahwa, Ferrero Rocher and Lotus Biscoff for a selection of truly unique flavors. Our cloud-kitchen model ensures each order is prepared with precision and delivered quickly, so you enjoy your dessert at its freshest. From thoughtful recipes to dependable service, we go the extra mile to make every bite memorable.
           </p>
           {/* <MaxContainer className="my-10 flex max-w-2xl flex-col items-center justify-center text-center sm:flex-row sm:justify-between">
             {[

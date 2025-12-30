@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useCart } from "@/contexts/cartContext";
 import type { product } from "@/types/products";
 import { toast } from "react-toastify";
+import dirham from '@/assets/UAE_Dirham_Symbol.svg'
 
 interface ProductDetailProps {
   name: string;
@@ -52,7 +53,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
     <div className="min-h-screen bg-[#ebe7d2] px-6 py-10">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-3 md:grid-cols-3">
         {/* LEFT - Thumbnails */}
-        <div className="flex flex-col items-center gap-3 md:items-start">
+        <div className="flex flex-row md:flex-col items-center justify-center gap-3 md:items-start md:justify-start">
           {images.map((img, idx) => (
             <div
               key={idx}
@@ -107,8 +108,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           <p className="font-medium text-gray-700">Weight: {weight}</p>
 
           {/* Price */}
-          <p className="mt-2 inline-block rounded-full bg-yellow px-3 py-1 w-fit text-white">
-            {price} AED
+          <p className="mt-2 inline-flex rounded-full items-center gap-1 bg-yellow px-3 py-1 w-fit text-white">
+            <img
+              src={dirham}
+              alt="Dirham"
+              className="w-4 h-4 brightness-0 invert mb-0.5"
+            />
+            {price}
           </p>
 
           {/* Quantity + Cart */}

@@ -52,7 +52,7 @@ const ProductsPage: React.FC = () => {
                     <img
                       src={dirham}
                       alt="Dirham"
-                      className="w-4 h-4 pb-0.5 fill-current"
+                      className="w-4 h-4 brightness-0 invert"
                     />
                     {p.price}
                   </p>

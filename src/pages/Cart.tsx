@@ -50,9 +50,9 @@ const Cart: React.FC = () => {
 				{items.map(({ id, name, price, quantity }) => (
 					<div
 						key={id}
-						className="flex items-center justify-between bg-white shadow-sm rounded-lg p-4 border"
+						className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between bg-white shadow-sm rounded-lg p-4 border"
 					>
-						<div>
+						<div className='flex flex-row gap-2 items-center justify-between md:flex-col md:items-start md:justify-start md:gap-1'>
 							<div className="font-semibold text-gray-800">{name}</div>
 							<div className="text-xs text-gray-500 flex items-center gap-1">
   								Unit Price:
@@ -64,7 +64,7 @@ const Cart: React.FC = () => {
   								{price.toFixed(2)}
 							</div>
 						</div>
-						<div className="flex items-center space-x-4">
+						<div className="flex flex-wrap items-center justify-between gap-3 md:justify-end md:flex-nowrap">
 							<div className="flex items-center border rounded px-2">
 								<button
 									onClick={() => decrement(id)}

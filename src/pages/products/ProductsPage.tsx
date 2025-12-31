@@ -1,34 +1,56 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-// import Carousel from "@/components/home/Carousel";
+import { Link, useParams, useLocation } from "react-router-dom";
 import Image from "@/components/ui/Image";
 import Pagination from "@/components/products/Pagination";
-import { data } from "@/lib/database"
+import { data } from "@/lib/database";
 import type { product } from "@/types/products";
-import dirham from '@/assets/UAE_Dirham_Symbol.svg'
-
+import dirham from "@/assets/UAE_Dirham_Symbol.svg";
 
 const ProductsPage: React.FC = () => {
+  const typeArr = ["large", "small", "box", "casserole"];
+  const titleArr = [
+    "Original Jars(250ml)",
+    "Petite Jars(150ml)",
+    "Combo Boxes",
+    "Casseroles",
+  ];
 
-  const typeArr = ['large', 'small', 'box', 'casserole'];
-  const titleArr = ['Original Jars(250ml)', 'Petite Jars(150ml)', 'Combo Boxes', 'Casseroles'];
+  const { id } = useParams<{ id: string }>();
+  const location = useLocation();
 
+  // Get search query from URL
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-  const { id } = useParams<{ id: string }>()
-  const products: product[] = data.filter(product => product.type === typeArr[Number(id) - 1])
+  // Filter products by type first
+  let products: product[] = data.filter(
+    (product) => product.type === typeArr[Number(id) - 1]
+  );
+
+  // Apply search filter if query exists
+  if (searchQuery) {
+    products = products.filter((p) => {
+      return (
+        p.name.toLowerCase().includes(searchQuery) ||
+        p.type.toLowerCase().includes(searchQuery) ||
+        p.weight.toLowerCase().includes(searchQuery)
+        // (p.description && p.description.toLowerCase().includes(searchQuery))
+      );
+    });
+  }
 
   return (
     <div className="">
-      {/* <Carousel /> */}
-      <div className=" my-10 mx-5">
-        <h2 className="mx-10 text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">{titleArr[Number(id) - 1]}</h2>
+      <div className="my-10 mx-5">
+        <h2 className="mx-10 text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
+          {titleArr[Number(id) - 1]}
+        </h2>
         <div className="mx-10 mt-6 grid grid-cols-1 justify-center gap-6 sm:grid-cols-2 md:grid-cols-3">
-
           {products.map((p) => (
             <Link
               key={p.slug}
-              to={`/product/${p.slug}`} // dynamic slug route
-              className="group relative w-full max-w-xs overflow-hidden  hover:shadow-lg"
+              to={`/product/${p.slug}`}
+              className="group relative w-full max-w-xs overflow-hidden hover:shadow-lg"
             >
               {/* Product Image */}
               <div className="relative">
@@ -45,7 +67,7 @@ const ProductsPage: React.FC = () => {
               {/* Product Info */}
               <div className="relative z-10 bg-[#ebe7d2] p-4">
                 <h3 className="text-lg font-semibold">{p.name}</h3>
-                <div className="">
+                <div>
                   <p className="mt-2 inline-flex items-center gap-1 rounded-full bg-yellow px-3 py-1 text-white">
                     <img
                       src={dirham}
@@ -56,7 +78,6 @@ const ProductsPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              {/* Add to Cart button at bottom */}
             </Link>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink,useNavigate } from "react-router";
 import { Search, User, ShoppingBag, X, Menu } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/contexts/cartContext";
@@ -12,13 +12,30 @@ const menus = [
 
 export default function Header() {
   const [show, setShow] = useState(false);
+  const [searchActive, setSearchActive] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState<string>("");
 
   const { state } = useCart();
   const { items } = state;
+  const navigate = useNavigate();
 
   // get total count (item * quantity)
   let c: number = 0
   items.forEach(i => { c = c + i.quantity })
+
+  // Toggle search input
+  const toggleSearch = () => setSearchActive(prev => !prev);
+
+  // Handle search submit
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!searchText.trim()) return;
+
+    // Redirect to products page with query param
+    navigate(`/products/1?search=${encodeURIComponent(searchText)}`);
+    setSearchText("");
+    setSearchActive(false);
+  };
 
   return (
     <header className="bg-[url('/nav-bg.webp')]">
@@ -40,7 +57,14 @@ export default function Header() {
             ))}
           </nav>
 
-          <ButtonGroup count={c} />
+          <ButtonGroup
+            count={c}
+            toggleSearch={toggleSearch}
+            searchActive={searchActive}
+            searchText={searchText}
+            setSearchText={setSearchText}
+            handleSearchSubmit={handleSearchSubmit}
+          />
 
           <button
             className="cursor-pointer text-white sm:hidden"
@@ -66,17 +90,67 @@ export default function Header() {
   );
 }
 
-function ButtonGroup({ count }: { count: number }) {
+function ButtonGroup({
+  count,
+  toggleSearch,
+  searchActive,
+  searchText,
+  setSearchText,
+  handleSearchSubmit
+}: {
+  count: number;
+  toggleSearch: () => void;
+  searchActive: boolean;
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  handleSearchSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}) {
   return (
     <div className="flex items-center gap-5 text-white sm:gap-8">
-      <Search strokeWidth={1.5} />
+      {/* Search */}
+      <div className="flex items-center gap-5 relative">
+        <div className="relative">
+          <button onClick={toggleSearch} className="mt-2">
+            <Search strokeWidth={1.5} className="text-white" />
+          </button>
+          {searchActive && (
+            <form
+              onSubmit={handleSearchSubmit}
+              className="absolute right-0 top-full flex w-64 p-1 gap-2 rounded bg-white shadow-lg"
+            >
+              <input
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                autoFocus
+                className="w-full rounded px-2 text-black"
+                placeholder="Search products..."
+              />
+              <button
+                type="submit"
+                className="rounded bg-[url('/nav-bg.webp')] px-3 text-white"
+              >
+                Go
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+
+      {/* User */}
       <Link to={'/login'}>
         <User strokeWidth={1.5} />
       </Link>
+
+      {/* Cart */}
       <Link to={'/cart'}>
         <div className="relative">
           <ShoppingBag strokeWidth={1.5} />
-          {count > 0 && <span className="absolute -top-1 -right-1 size-4 bg-white rounded-full flex justify-center items-center text-[var(--color-purple)] text-sm">{count}</span>}
+          {count > 0 && (
+            <span className="absolute -top-1 -right-1 size-4 bg-white rounded-full flex justify-center items-center text-[var(--color-purple)] text-sm">
+              {count}
+            </span>
+          )}
         </div>
       </Link>
     </div>

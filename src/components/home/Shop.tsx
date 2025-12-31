@@ -4,8 +4,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 
 const dummyImages = [
-  { img: "/nhs.png", page: "/products/1", label: "Original Jars (250ml)" },
-  { img: "/nhss.png", page: "/products/2", label: "Petite Jars (150ml)" },
+  { img: "/productpage/Ferrero Rocher/DSCF6179.jpg", page: "/products/1", label: "Original Jars (250ml)" },
+  { img: "/productpage/Pistachio/DSCF0830.jpg", page: "/products/2", label: "Petite Jars (150ml)" },
   { img: "/sjhd.png", page: "/products/3", label: "Combo Boxes" },
   {
     img: "/productpage/Casseroles/DSCF1032.jpg",

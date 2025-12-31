@@ -3,18 +3,6 @@ import Image from "../ui/Image";
 
 import slide1 from "@/assets/carousel1.png";
 
-// // slide-2 images (4 merged)
-// import s2_1 from "@/assets/slide2-1.jpg";
-// import s2_2 from "@/assets/slide2-2.jpg";
-// import s2_3 from "@/assets/slide2-3.jpg";
-// import s2_4 from "@/assets/slide2-4.jpg";
-
-// // slide-3 images (4 merged)
-// import s3_1 from "@/assets/slide3-1.jpg";
-// import s3_2 from "@/assets/slide3-2.jpg";
-// import s3_3 from "@/assets/slide3-3.jpg";
-// import s3_4 from "@/assets/slide3-4.jpg";
-
 interface Slide {
   id: number;
   text: string;
@@ -30,17 +18,17 @@ const slides: Slide[] = [
   {
     id: 1,
     text: "Slide 1",
-    image: slide1, // keep as it is
+    image: slide1,
   },
   {
     id: 2,
     text: "Slide 2",
-    images: ["/carousel2/DSCF0564.jpg","/carousel2/DSCF0725.jpg","/carousel2/DSCF0747.jpg","/carousel2/DSCF0830.jpg"], // merged
+    images: ["/carousel2/DSCF0564.jpg","/carousel2/DSCF0725.jpg","/carousel2/DSCF0747.jpg","/carousel2/DSCF0830.jpg"],
   },
   {
     id: 3,
     text: "Slide 3",
-    images: ["/carousel3/DSCF0410.jpg","/carousel3/DSCF0577.jpg","/carousel3/DSCF0597.jpg","/carousel3/DSCF0623.jpg"], // merged
+    images: ["/carousel3/DSCF0410.jpg","/carousel3/DSCF0577.jpg","/carousel3/DSCF0597.jpg","/carousel3/DSCF0623.jpg"],
   },
 ];
 
@@ -49,8 +37,38 @@ const HEIGHT_CLASSES =
 
 const Carousel: React.FC<Props> = ({ dashes = false }) => {
   const [index, setIndex] = useState<number>(0);
+  const [preloadedSlides, setPreloadedSlides] = useState<number[]>([]);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const delay = 3000;
+
+  // Preload next slide images
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      const img = new window.Image();
+      img.src = src;
+    };
+
+    // Preload current slide and next slide
+    const slidesToPreload = [index, (index + 1) % slides.length];
+    
+    slidesToPreload.forEach((slideIndex) => {
+      if (!preloadedSlides.includes(slideIndex)) {
+        const slide = slides[slideIndex];
+        
+        if (slide.image) {
+          preloadImage(slide.image);
+        }
+        
+        if (slide.images) {
+          // Only preload first 2 images on mobile, all on desktop
+          const imagesToPreload = window.innerWidth < 768 ? slide.images.slice(0, 2) : slide.images;
+          imagesToPreload.forEach(preloadImage);
+        }
+        
+        setPreloadedSlides(prev => [...prev, slideIndex]);
+      }
+    });
+  }, [index]);
 
   const resetTimeout = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -71,41 +89,46 @@ const Carousel: React.FC<Props> = ({ dashes = false }) => {
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {slides.map((slide) => (
+        {slides.map((slide, slideIndex) => (
           <div key={slide.id} className="w-full flex-shrink-0">
             {/* SINGLE IMAGE SLIDE */}
             {slide.image && (
               <Image
                 src={slide.image}
                 alt={slide.text}
-                loading="eager"
+                loading={slideIndex === index ? "eager" : "lazy"}
                 className={`${HEIGHT_CLASSES} object-cover`}
               />
             )}
 
             {/* MERGED IMAGE SLIDE */}
-			{slide.images && (
-			  <div
-			    className={`
-			      grid grid-cols-2
-			      md:grid-cols-4
-			      ${HEIGHT_CLASSES}
-			    `}
-			  >
-			    {slide.images.map((img, i) => (
-			      <Image
-			        key={i}
-			        src={img}
-			        alt={`${slide.text} ${i + 1}`}
-			        loading="eager"
-			        className={`
-          w-full h-full object-cover
-          ${i >= 2 ? "hidden md:block" : ""}
-        `}
-			      />
-			    ))}
-			  </div>
-			)}
+            {slide.images && (
+              <div
+                className={`
+                  grid grid-cols-2
+                  md:grid-cols-4
+                  ${HEIGHT_CLASSES}
+                `}
+              >
+                {slide.images.map((img, i) => (
+                  <Image
+                    key={i}
+                    src={img}
+                    alt={`${slide.text} ${i + 1}`}
+                    // Only load eagerly for current slide and first 2 images on mobile
+                    loading={
+                      slideIndex === index 
+                        ? (window.innerWidth < 768 && i < 2 ? "eager" : "lazy")
+                        : "lazy"
+                    }
+                    className={`
+                      w-full h-full object-cover
+                      ${i >= 2 ? "hidden md:block" : ""}
+                    `}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

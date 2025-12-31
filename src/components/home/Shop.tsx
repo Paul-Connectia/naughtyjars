@@ -14,7 +14,7 @@ const dummyImages = [
   },
 ];
 
-const marqueeItems = [...dummyImages, ...dummyImages];
+const marqueeItems = [...dummyImages, ...dummyImages, ...dummyImages, ...dummyImages]; // Duplicate for smooth infinite effect
 
 export default function Shop() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -40,8 +40,29 @@ export default function Shop() {
         signature delights delivered fresh to your door.
       </p>
 
-      {/* --- MARQUEE WITH ARROWS --- */}
+      {/* --- MARQUEE WITH ARROWS & INFINITE SCROLL --- */}
       <div className="relative mt-12">
+        {/* Marquee animation CSS */}
+        <style>{`
+          @keyframes scrollShop {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-shop-marquee {
+            animation: scrollShop 40s linear infinite;
+          }
+          .animate-shop-marquee:hover {
+            animation-play-state: paused;
+          }
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
+
         {/* Left Arrow */}
         <button
           onClick={() => scroll("left")}
@@ -91,13 +112,6 @@ export default function Shop() {
                       {item.label}
                     </div>
                   </div>
-
-                  <button className="bg-yellow rounded-3xl px-6 py-1.5
-                                     text-lg text-white
-                                     transition-colors duration-300
-                                     hover:bg-yellow-800/75">
-                    Shop Now
-                  </button>
                 </Link>
               </div>
             ))}
@@ -107,6 +121,16 @@ export default function Shop() {
         {/* Gradient edges */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
+      </div>
+      <div className="mt-12 flex justify-center">
+        <Link 
+          to="/products/1" 
+          className="bg-yellow hover:bg-yellow-800/75 text-white font-medium 
+                     rounded-3xl px-10 py-3 text-xl transition-colors 
+                     duration-300 shadow-lg hover:shadow-xl"
+        >
+          Shop Now
+        </Link>
       </div>
     </MaxContainer>
   );

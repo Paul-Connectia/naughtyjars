@@ -38,11 +38,9 @@ const ProductsPage: React.FC = () => {
                   className="h-48 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                 />
                 <button className="hidden group-hover:block px-3 py-1 text-white w-full bg-yellow-800/80 absolute top-0">
-                  Add to Cart
+                  Checkout
                 </button>
               </div>
-
-
 
               {/* Product Info */}
               <div className="relative z-10 bg-[#ebe7d2] p-4">

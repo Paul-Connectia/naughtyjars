@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart } from '@/contexts/cartContext';
 import { Trash } from 'lucide-react';
+import dirham from '@/assets/UAE_Dirham_Symbol.svg'
 
 const Cart: React.FC = () => {
 	const { state, dispatch } = useCart();
@@ -53,7 +54,15 @@ const Cart: React.FC = () => {
 					>
 						<div>
 							<div className="font-semibold text-gray-800">{name}</div>
-							<div className="text-xs text-gray-500">Unit Price: {price.toFixed(2)} AED</div>
+							<div className="text-xs text-gray-500 flex items-center gap-1">
+  								Unit Price:
+  								<img
+  								  src={dirham}
+  								  alt="Dirham"
+  								  className="w-2.5 h-2.5 mb-0.5 opacity-60"
+  								/>
+  								{price.toFixed(2)}
+							</div>
 						</div>
 						<div className="flex items-center space-x-4">
 							<div className="flex items-center border rounded px-2">
@@ -73,8 +82,13 @@ const Cart: React.FC = () => {
 									+
 								</button>
 							</div>
-							<div className="text-sm font-semibold text-gray-800">
-								{(price * quantity).toFixed(2)}AED
+							<div className="text-sm font-semibold text-gray-800 flex items-center gap-1">
+								<img
+  								  src={dirham}
+  								  alt="Dirham"
+  								  className="w-3 h-3 brightness-75 contrast-125"
+  								/>
+								{(price * quantity).toFixed(2)}
 							</div>
 							<button
 								onClick={() => remove(id)}
@@ -87,8 +101,16 @@ const Cart: React.FC = () => {
 				))}
 			</div>
 
-			<div className="mt-8 text-right">
-				<span className="text-xl font-semibold">Total: {total.toFixed(2)} AED</span>
+			<div className="mt-8 flex items-center justify-end text-right">
+				<span className="text-xl flex gap-1 font-semibold">
+					Total: 
+					<img
+  						src={dirham}
+  						alt="Dirham"
+  						className="w-4 h-4 text-gray-500 mt-1.5 ms-1"
+  					/>
+					{total.toFixed(2)} 
+				</span>
 				{/* Add checkout logic or button below */}
 				<button className="ml-4 px-6 py-2 bg-[var(--color-purple)] text-white rounded-lg hover:bg-primary-dark transition-colors font-bold">Checkout</button>
 			</div>

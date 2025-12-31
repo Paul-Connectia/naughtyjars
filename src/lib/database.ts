@@ -24,7 +24,7 @@ export const data = [
   {
     name: "Classic Tiramisu",
     price: 40,
-    images: ["/productpage/Classic/DSCF0560.jpg", "/productpage/Classic/DSCF0567.jpg", "/productpage/Classic/DSCF0588.jpg"],
+    images: ["/productpage/Classic/DSCF0567.jpg", "/productpage/Classic/DSCF0560.jpg", "/productpage/Classic/DSCF0588.jpg"],
     slug: "classic-tiramisu-150ml",
     weight: "250ml",
     type: "large",
@@ -75,7 +75,7 @@ export const data = [
   {
     name: "Classic Tiramisu",
     price: 25,
-    images: ["/productpage/Classic/DSCF0560.jpg", "/productpage/Classic/DSCF0567.jpg", "/productpage/Classic/DSCF0588.jpg"],
+    images: ["/productpage/Classic/DSCF0567.jpg", "/productpage/Classic/DSCF0560.jpg", "/productpage/Classic/DSCF0588.jpg"],
     slug: "classic-tiramisu-250ml",
     weight: "150ml",
     type: "small",

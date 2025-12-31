@@ -118,9 +118,7 @@ function ButtonGroup({
               onSubmit={handleSearchSubmit}
               className="absolute top-full
                 left-1/2 -translate-x-1/2
-                w-[90vw] max-w-xs
-                sm:left-auto sm:right-0 sm:translate-x-0 sm:w-64
-                flex gap-2 rounded bg-white p-1 shadow-lg"
+                w-[90vw] max-w-xs sm:left-auto sm:right-0 sm:translate-x-0 sm:w-64 flex gap-2 rounded bg-white p-1 shadow-lg"
               >
               <input
                 type="text"

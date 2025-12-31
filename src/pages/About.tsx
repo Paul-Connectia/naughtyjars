@@ -1,6 +1,6 @@
 import Subscribe from "@/components/about/Subscribe";
 import Team from "@/components/about/Team";
-import StatsCircles from "@/components/StatsCircles";
+// import StatsCircles from "@/components/StatsCircles";
 import Image from "@/components/ui/Image";
 import Head from "@/layout/Head";
 import MaxContainer from "@/layout/MaxContainer";
@@ -74,7 +74,7 @@ export default function About() {
         </p>
       </MaxContainer>
 
-      <section className="rounded-t-4xl bg-[#f1dab0] px-5 py-10 sm:px-8 md:px-10">
+      <section className="rounded-t-4xl  bg-[#f1dab0] px-5 py-10 sm:px-8 md:px-10">
         <MaxContainer>
           <h4 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
             Why Choose Us
@@ -117,9 +117,9 @@ export default function About() {
               </div>
             ))}
           </MaxContainer> */}
-          <div className="py-4">
+          {/* <div className="py-4">
             <StatsCircles />
-          </div>
+          </div> */}
         </MaxContainer>
 
         <Team />

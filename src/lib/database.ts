@@ -1,7 +1,7 @@
 export const data = [
   {
     name: "Box of Orginal Jars (250ml x 5)",
-    price: 180,
+    price: 200,
     images: ["/sjhd.png", "/nhs.png", "/nhs.png"],
     slug: "box-of-orginal-jars",
     weight: "250ml X 5",
@@ -12,7 +12,7 @@ export const data = [
   },
   {
     name: "Box of Pistachio Jars (150ml x 5)",
-    price: 200,
+    price: 180,
     images: ["/sjhd.png", "/nhs.png", "/nhs.png"],
     slug: "box-of-pistachio-jars",
     weight: "150ml X 9",
@@ -69,7 +69,7 @@ export const data = [
     slug: "date-qahwa-tiramisu-150ml",
     weight: "250ml",
     type: "large",
-    description: "Enjoy the timeless harmony of bold coffee and smooth mascarpone crafted into a truly elegant classic.",
+    description: "Experience the magic of premium dates and aromatic Arabic coffee in every luxurious layer.",
     reviews: 4.2,
   },
   {
@@ -121,7 +121,7 @@ export const data = [
     slug: "date-qahwa-tiramisu-250ml",
     weight: "150ml",
     type: "small",
-    description: "Enjoy the timeless harmony of bold coffee and smooth mascarpone crafted into a truly elegant classic.",
+    description: "Experience the magic of premium dates and aromatic Arabic coffee in every luxurious layer.",
     reviews: 4.2,
   },
 

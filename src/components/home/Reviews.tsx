@@ -10,7 +10,7 @@ const reviews = [
   },
   {
     id: 2,
-    text: "I just served the tiramisu to my guests. They loved it. We liked how balanced the coffee and the cream tasted, how it wasn’t extra sugary.Nobody stopped at a single serving and everyone had a mild smile on their face after eating it. Many compliments and many thanks to you for getting this done so quickly and I can’t wait to reorder.",
+    text: "I just served the tiramisu to my guests. They loved it. We liked how balanced the coffee and the cream tasted, how it wasn’t extra sugary. Nobody stopped at a single serving and everyone had a mild smile on their face after eating it. Many compliments and many thanks to you for getting this done so quickly and I can’t wait to reorder.",
     author: "Kanav Minocha",
   },
   {

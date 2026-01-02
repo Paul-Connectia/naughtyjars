@@ -11,7 +11,7 @@ export const data = [
     reviews: 4.5,
   },
   {
-    name: "Box of Pistachio Jars (150ml x 5)",
+    name: "Box of Pettie Jars (150ml x 5)",
     price: 180,
     images: ["/sjhd.png", "/nhs.png", "/nhs.png"],
     slug: "box-of-pistachio-jars",

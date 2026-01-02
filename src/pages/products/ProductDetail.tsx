@@ -25,7 +25,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   reviews,
 }) => {
   const [mainImage, setMainImage] = useState(images[0]);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
 
   const { dispatch } = useCart();
 
@@ -47,6 +47,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
         quantity: quantity,
       },
     });
+    
   };
 
   return (
@@ -122,7 +123,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             <div className="flex items-center border">
               <button
                 className="rounded bg-gray-200 px-3 py-1 hover:bg-gray-300"
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                onClick={() => setQuantity((q) => Math.max(0, q - 1))}
               >
                 <Minus />
               </button>
@@ -135,6 +136,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
               </button>
             </div>
             <button
+             disabled={quantity === 0}
               onClick={() =>
                 handleAddToCart({
                   name,
@@ -144,7 +146,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                   weight,
                 })
               }
-              className="bg-gray-700 px-5 py-2 font-semibold text-white transition hover:bg-gray-600"
+              className="bg-gray-700 px-5 py-2 font-semibold   text-white transition hover:bg-gray-600"
             >
               Add to Cart
             </button>

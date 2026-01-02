@@ -23,7 +23,7 @@ const slides: Slide[] = [
   {
     id: 2,
     text: "Slide 2",
-    images: ["/carousel2/DSCF0564.jpg","/carousel2/DSCF0725.jpg","/carousel2/DSCF0725.jpg","/carousel2/DSCF0830.jpg"],
+    images: ["/carousel2/DSCF0564.jpg","/carousel2/DSCF0725.jpg","/carousel2/DSCF0747.jpg","/carousel2/DSCF0830.jpg"],
   },
   {
     id: 3,

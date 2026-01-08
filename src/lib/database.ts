@@ -131,7 +131,7 @@ export const data = [
   price: 250,
   images: ["/productpage/Casseroles/DSCF1032.jpg", "/productpage/Casseroles/DSCF1048.jpg", "/productpage/Casseroles/DSCF1060.jpg", "/productpage/Casseroles/DSCF1117.jpg"],
   slug: "classic-tiramisu-casserole-8-10",
-  weight: "8–10 people",
+  weight: "for 8–10 people",
   type: "casserole",
   description:
     "Your favourite Tiramisu flavour in party size, delivered in a convenient and elegant glass casserole. Pre-order at least 24 hours in advance.",
@@ -142,10 +142,33 @@ export const data = [
   price: 350,
   images: ["/productpage/Casseroles/DSCF1032.jpg", "/productpage/Casseroles/DSCF1048.jpg", "/productpage/Casseroles/DSCF1060.jpg", "/productpage/Casseroles/DSCF1117.jpg"],
   slug: "classic-tiramisu-casserole-12-14",
-  weight: "12–14 people",
+  weight: "for 12–14 people",
   type: "casserole",
   description:
     "Your favourite Tiramisu flavour in party size, delivered in a convenient and elegant glass casserole. Pre-order at least 24 hours in advance.",
   reviews: 4.5,
 },
+{
+  name: "Minis (Set of 12Minis)",
+  price: 120,
+  images: ["/productpage/mini/DSCF6882.jpg", "/productpage/mini/DSCF6317.jpg", "/productpage/mini/DSCF6346.jpg", "/productpage/mini/DSCF6851.jpg"],
+  slug: "minis-12",
+  weight: "12 minis",
+  type: "minis",
+  description:
+    "A delightful selection of our signature Tiramisu flavours in bite-sized mini jars, ideal for parties and gatherings. Sold as sets of  24. Pre-order at least 24 hours in advance",
+  reviews: 4.5,
+},
+{
+  name: "Minis (Set of 24Minis)",
+  price: 240,
+  images: ["/productpage/mini/DSCF6882.jpg", "/productpage/mini/DSCF6317.jpg", "/productpage/mini/DSCF6346.jpg", "/productpage/mini/DSCF6851.jpg"],
+  slug: "minis-24",
+  weight: "24 minis",
+  type: "minis",
+  description:
+    "A delightful selection of our signature Tiramisu flavours in bite-sized mini jars, ideal for parties and gatherings. Sold as sets of 24. Pre-order at least 24 hours in advance",
+  reviews: 4.5,
+},
+
 ];

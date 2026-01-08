@@ -106,7 +106,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           <h1 className="text-2xl font-semibold text-gray-900">{name}</h1>
 
           {/* Weight */}
-          <p className="font-medium text-gray-700">Weight: {weight}</p>
+          <p className="font-medium text-gray-700">Quantity: {weight}</p>
 
           {/* Price */}
           <p className="mt-2 inline-flex rounded-full items-center gap-1 bg-yellow px-3 py-1 w-fit text-white">

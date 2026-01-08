@@ -149,7 +149,7 @@ export const data = [
   reviews: 4.5,
 },
 {
-  name: "Minis (Set of 12Minis)",
+  name: "Minis (Set of 12 Jars)",
   price: 120,
   images: ["/productpage/mini/DSCF6882.jpg", "/productpage/mini/DSCF6317.jpg", "/productpage/mini/DSCF6346.jpg", "/productpage/mini/DSCF6851.jpg"],
   slug: "minis-12",
@@ -160,7 +160,7 @@ export const data = [
   reviews: 4.5,
 },
 {
-  name: "Minis (Set of 24Minis)",
+  name: "Minis (Set of 24 Jars)",
   price: 240,
   images: ["/productpage/mini/DSCF6882.jpg", "/productpage/mini/DSCF6317.jpg", "/productpage/mini/DSCF6346.jpg", "/productpage/mini/DSCF6851.jpg"],
   slug: "minis-24",

@@ -29,7 +29,7 @@ const Pagination = ({ id }: { id: number }) => {
 			</Link>
 			<Link
 				to="/products/5"
-				className={`rounded-3xl ${id === 4 ? "bg-purple-600" : "bg-gray-500/60"} size-10 justify-center items-center flex text-white`}
+				className={`rounded-3xl ${id === 5 ? "bg-purple-600" : "bg-gray-500/60"} size-10 justify-center items-center flex text-white`}
 			>
 				5
 			</Link>

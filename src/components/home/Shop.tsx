@@ -13,7 +13,7 @@ const dummyImages = [
     label: "Casserole",
   },
   {
-    img: "/productpage/mini/DSCF6346.jpg",
+    img: "/productpage/mini/DSCF6851.jpg",
     page: "/products/5",
     label: "Minis",
   },

@@ -3,7 +3,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import Login from "./pages/auth/login";
+
 import Cart from "./pages/Cart";
 import { CartProvider } from "./contexts/cartContext";
 import { SearchProvider } from "./contexts/searchContext";
@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 // ✅ Lazy load components
 const Layout = lazy(() => import("@/layout/Layout"));
 const Home = lazy(() => import("./pages/Home"));
+const  Login =lazy(()=>import("./pages/auth/login"))
+const SignUp =lazy(()=>import("./pages/auth/signup"))
 const ProductsPage = lazy(() => import("@/pages/products/ProductsPage"));
 const ProductDetailPage = lazy(() => import("@/pages/products/ProductDetailPage"));
 const About = lazy(() => import("./pages/About"));
@@ -35,6 +37,7 @@ const router = createBrowserRouter([
       { path: "/blogs", element: <Blog /> },
       {path: "/blog/:slug", element: <BlogDetail />},
       { path: "/login", element: <Login /> },
+      {path:"/signup", element:<SignUp/>},
       { path: "/cart", element: <Cart /> },
       {path:"/search", element:<SearchPage/>}
     ],

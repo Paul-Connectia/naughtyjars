@@ -1,10 +1,11 @@
 export type product = {
+  _id: string;       // MongoDB ID
   name: string;
+  slug?: string;     // optional if your backend has slug
   price: number;
   images: string[];
-  slug: string;
   weight: string;
-  type: string;
-  description: string;
-  reviews: number;
+  description?: string;
+  reviews?: number;
+  type: string;      // For filtering in ProductsPage
 };

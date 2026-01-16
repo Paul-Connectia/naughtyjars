@@ -1,13 +1,12 @@
 import { Minus, Plus } from "lucide-react";
 import React, { useState } from "react";
 import { useCart } from "@/contexts/cartContext";
-import type { product } from "@/types/products";
 import { toast } from "react-toastify";
-import dirham from '@/assets/UAE_Dirham_Symbol.svg'
+import dirham from '@/assets/UAE_Dirham_Symbol.svg';
 
 interface ProductDetailProps {
+  _id: string;          // Add _id from backend
   name: string;
-  slug: string;
   price: number;
   images: string[];
   weight: string;
@@ -16,8 +15,8 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({
+  _id,
   name,
-  slug,
   price,
   images,
   weight,
@@ -29,25 +28,26 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 
   const { dispatch } = useCart();
 
-  const handleAddToCart = (
-    product: Omit<product, "description" | "reviews" | "type">,
-  ) => {
+  const handleAddToCart = () => {
+    if (!_id) {
+      toast.error("Product ID missing, cannot add to cart!");
+      return;
+    }
+
     toast.success("Product added to cart", {
-      style: {
-        backgroundColor: "#7e3c94",
-        color: "#fff",
-      },
+      style: { backgroundColor: "#7e3c94", color: "#fff" },
     });
+
     dispatch({
       type: "ADD_ITEM",
       payload: {
-        id: product.slug,
-        name: product.name,
-        price: product.price,
-        quantity: quantity,
+        id: _id,       // use _id as unique cart id
+        name,
+        price,
+        quantity,
+        images,        // optional
       },
     });
-    
   };
 
   return (
@@ -58,29 +58,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           {images.map((img, idx) => (
             <div
               key={idx}
-              className="relative"
+              className="relative cursor-pointer"
               onClick={() => setMainImage(img)}
             >
               <img
                 src={img}
                 alt={`${name} ${idx}`}
-                className={`h-25 w-25 cursor-pointer rounded border object-cover transition hover:scale-105 ${img === mainImage ? "border-yellow-500" : "border-gray-300"
-                  }`}
+                className={`h-25 w-25 rounded border object-cover transition hover:scale-105 ${img === mainImage ? "border-yellow-500" : "border-gray-300"}`}
               />
-              {idx === 2 && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="rounded-full bg-black/50 p-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-white"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M6.5 5.5v9l8-4.5-8-4.5z" />
-                    </svg>
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>
@@ -99,7 +84,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           {/* Rating */}
           <div className="flex items-center gap-1 text-yellow-400">
             {"★★★★★"}
-            <span className="ml-2 text-sm text-gray-700">{reviews} / 5</span>
+            <span className="ml-2 text-sm text-gray-700">{reviews || 0} / 5</span>
           </div>
 
           {/* Name */}
@@ -110,11 +95,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 
           {/* Price */}
           <p className="mt-2 inline-flex rounded-full items-center gap-1 bg-yellow px-3 py-1 w-fit text-white">
-            <img
-              src={dirham}
-              alt="Dirham"
-              className="w-4 h-4 brightness-0 invert mb-0.5"
-            />
+            <img src={dirham} alt="Dirham" className="w-4 h-4 brightness-0 invert mb-0.5" />
             {price}
           </p>
 
@@ -123,30 +104,22 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             <div className="flex items-center border">
               <button
                 className="rounded bg-gray-200 px-3 py-1 hover:bg-gray-300"
-                onClick={() => setQuantity((q) => Math.max(0, q - 1))}
+                onClick={() => setQuantity(q => Math.max(0, q - 1))}
               >
                 <Minus />
               </button>
               <span className="text-lg font-medium">{quantity}</span>
               <button
                 className="rounded bg-gray-200 px-3 py-1 hover:bg-gray-300"
-                onClick={() => setQuantity((q) => q + 1)}
+                onClick={() => setQuantity(q => q + 1)}
               >
                 <Plus />
               </button>
             </div>
             <button
-             disabled={quantity === 0}
-              onClick={() =>
-                handleAddToCart({
-                  name,
-                  slug,
-                  price,
-                  images,
-                  weight,
-                })
-              }
-              className="bg-gray-700 px-5 py-2 font-semibold   text-white transition hover:bg-gray-600"
+              disabled={quantity === 0}
+              onClick={handleAddToCart}
+              className="bg-gray-700 px-5 py-2 font-semibold text-white transition hover:bg-gray-600"
             >
               Add to Cart
             </button>
@@ -160,11 +133,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           >
             <div className="flex items-center gap-2 px-2 py-2 transition">
               <div className="h-10 w-10 rounded-3xl bg-[#25D366]">
-                <img
-                  src="/whatsapp-logo.png"
-                  alt="WhatsApp"
-                  className="mt-1 ml-1 h-8 w-8 object-contain"
-                />
+                <img src="/whatsapp-logo.png" alt="WhatsApp" className="mt-1 ml-1 h-8 w-8 object-contain" />
               </div>
               <span className="rounded-3xl bg-yellow px-5 py-2 font-semibold text-white transition hover:bg-yellow-800/80">
                 Order on WhatsApp
@@ -176,12 +145,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 
       {/* DESCRIPTION SECTION */}
       <div className="mx-auto mt-10 max-w-5xl">
-        <h2 className="mb-3 text-2xl font-semibold text-gray-800">
-          Description
-        </h2>
+        <h2 className="mb-3 text-2xl font-semibold text-gray-800">Description</h2>
         <p className="leading-relaxed text-gray-700">
-          {description ||
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis."}
+          {description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}
         </p>
       </div>
     </div>

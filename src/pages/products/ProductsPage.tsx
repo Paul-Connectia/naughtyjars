@@ -1,49 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import Image from "@/components/ui/Image";
 import Pagination from "@/components/products/Pagination";
-import { data } from "@/lib/database";
+import { getProductsByType } from "@/api/products";
 import type { product } from "@/types/products";
 import dirham from "@/assets/UAE_Dirham_Symbol.svg";
 
 const ProductsPage: React.FC = () => {
-  const typeArr = ["large", "small", "box", "casserole", "minis"]; // Changed from "mini" to "minis"
+  const typeArr = ["large", "small", "box", "casserole", "minis"];
   const titleArr = [
     "Original Jars(250ml)",
     "Petite Jars(150ml)",
     "Combo Boxes",
     "Casseroles",
-    "Minis" // This is correct
+    "Minis"
   ];
 
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  console.log("Page ID:", id);
-  console.log("Expected type for this page:", typeArr[Number(id) - 1]);
+  const [products, setProducts] = useState<product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // Get search query from URL
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-  // Filter products by type first
-  let products: product[] = data.filter(
-    (product) => product.type === typeArr[Number(id) - 1]
-  );
-console.log("Found product:", products.length);
-  // Apply search filter if query exists
-  if (searchQuery) {
-    products = products.filter((p) => {
-      return (
-        p.name.toLowerCase().includes(searchQuery) ||
-        p.type.toLowerCase().includes(searchQuery) ||
-        p.weight.toLowerCase().includes(searchQuery)
-        // (p.description && p.description.toLowerCase().includes(searchQuery))
-      );
-    });
-  }
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      const type = typeArr[Number(id) - 1];
+      const fetchedProducts = await getProductsByType(type);
+
+      // Apply search filter if query exists
+      const filteredProducts = searchQuery
+        ? fetchedProducts.filter(
+            (p) =>
+              p.name.toLowerCase().includes(searchQuery) ||
+              p.type.toLowerCase().includes(searchQuery) ||
+              p.weight.toLowerCase().includes(searchQuery)
+          )
+        : fetchedProducts;
+
+      setProducts(filteredProducts);
+      setLoading(false);
+    };
+
+    fetchProducts();
+  }, [id, searchQuery]);
+
+  if (loading) return <div className="text-center mt-10">Loading...</div>;
 
   return (
-    <div className="">
+    <div>
       <div className="my-10 mx-5">
         <h2 className="mx-10 text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
           {titleArr[Number(id) - 1]}
@@ -51,11 +59,10 @@ console.log("Found product:", products.length);
         <div className="mx-10 mt-6 grid grid-cols-1 justify-center gap-6 sm:grid-cols-2 md:grid-cols-3">
           {products.map((p) => (
             <Link
-              key={p.slug}
-              to={`/product/${p.slug}`}
+              key={p._id} // use _id from backend
+              to={`/product/${p._id}`}
               className="group relative w-full max-w-xs overflow-hidden hover:shadow-lg"
             >
-              {/* Product Image */}
               <div className="relative">
                 <Image
                   src={p.images[0]}
@@ -66,8 +73,6 @@ console.log("Found product:", products.length);
                   Checkout
                 </button>
               </div>
-
-              {/* Product Info */}
               <div className="relative z-10 bg-[#ebe7d2] p-4">
                 <h3 className="text-lg font-semibold">{p.name}</h3>
                 <div>

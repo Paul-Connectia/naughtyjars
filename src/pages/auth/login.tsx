@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import { loginUser } from "../../api/auth";
 import { useNavigate } from "react-router";
+import { loginUser } from "../../api/auth";
 
-const Login: React.FC = () => {
+// Define User type
+interface User {
+  role: "admin" | "crew" | "user";
+}
+
+interface LoginProps {
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
+const Login: React.FC<LoginProps> = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -13,24 +22,31 @@ const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-  
+
     try {
-      const data = await loginUser(email, password); 
+      // Call login API
+      const data = await loginUser(email, password);
       const { token, user } = data;
 
+      // Save token & user in localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // ✅ Redirect logic
-      if (user.role === "crew") navigate("/crew-dashboard");
-      else navigate("/");
+      setUser(user);
+
+      // Redirect based on role
+      if (user.role === "admin" || user.role === "crew") {
+        navigate("/admin"); // AdminLayout will handle what crew/admin sees
+      } else {
+        navigate("/"); // Normal user stays on main site
+      }
     } catch (err: any) {
       console.error(err);
       setError(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
-   };
+  };
 
   return (
     <div className="h-[75vh] flex items-center justify-center">
@@ -42,6 +58,7 @@ const Login: React.FC = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Email */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email
@@ -52,10 +69,12 @@ const Login: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="you@example.com"
+              className="w-full px-3 py-2 border rounded-md outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
+          {/* Password */}
           <div>
             <label htmlFor="password" className="block text-sm font-medium mb-1">
               Password
@@ -66,10 +85,11 @@ const Login: React.FC = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Your password"
+              className="w-full px-3 py-2 border rounded-md outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -78,16 +98,16 @@ const Login: React.FC = () => {
             {loading ? "Logging in..." : "Log In"}
           </button>
         </form>
-        <p className="text-sm text-center mt-4">
-  Not a member?{" "}
-  <span
-    onClick={() => navigate("/signup")}
-    className="text-[var(--color-purple)] font-medium cursor-pointer hover:underline"
-  >
-    Register here
-  </span>
-</p>
 
+        <p className="text-sm text-center mt-4">
+          Not a member?{" "}
+          <span
+            onClick={() => navigate("/signup")}
+            className="text-[var(--color-purple)] font-medium cursor-pointer hover:underline"
+          >
+            Register here
+          </span>
+        </p>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ interface CartItem {
   name: string;
   price: number;
   quantity: number;
+  images?: string[];
   // Add other product properties as needed (e.g., image, slug)
 }
 

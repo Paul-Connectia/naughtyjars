@@ -1,20 +1,21 @@
+import { createCrew } from "@/api/crewApi";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 interface CrewForm {
   name: string;
-  role: string;
+  position: string;
   email: string;
-  phone: string;
+  contact: string;
   status: string;
 }
 
 const AddCrew = () => {
   const [formData, setFormData] = useState<CrewForm>({
     name: "",
-    role: "",
+    position: "",
     email: "",
-    phone: "",
+    contact: "",
     status: "active",
   });
 
@@ -25,22 +26,33 @@ const AddCrew = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // You can later replace this with API call
-    console.log("Crew data:", formData);
+  try {
+    const token = localStorage.getItem("token"); // or from context
+    if (!token) {
+      toast.error("Please login first");
+      return;
+    }
+
+    await createCrew(formData, token);
+
     toast.success("Crew member added successfully!");
 
-    // reset form
     setFormData({
       name: "",
-      role: "",
+      position: "",
       email: "",
-      phone: "",
+      contact: "",
       status: "active",
     });
-  };
+  } catch (error: any) {
+    toast.error(
+      error.response?.data?.message || "Failed to add crew member"
+    );
+  }
+};
 
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
@@ -66,8 +78,8 @@ const AddCrew = () => {
           <label className="block text-sm font-medium mb-2">Role</label>
           <input
             type="text"
-            name="role"
-            value={formData.role}
+            name="position"
+            value={formData.position}
             onChange={handleChange}
             placeholder="e.g. Driver, Mechanic, Supervisor"
             required
@@ -93,8 +105,8 @@ const AddCrew = () => {
           <label className="block text-sm font-medium mb-2">Phone Number</label>
           <input
             type="tel"
-            name="phone"
-            value={formData.phone}
+            name="contact"
+            value={formData.contact}
             onChange={handleChange}
             placeholder="Enter phone number"
             className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"

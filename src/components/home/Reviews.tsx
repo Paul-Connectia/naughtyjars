@@ -10,7 +10,7 @@ const reviews = [
   },
   {
     id: 2,
-    text: "I just served the tiramisu to my guests. They loved it. We liked how balanced the coffee and the cream tasted, how it wasn’t extra sugary.Nobody stopped at a single serving and everyone had a mild smile on their face after eating it. Many compliments and many thanks to you for getting this done so quickly and I can’t wait to reorder.",
+    text: "I just served the tiramisu to my guests. They loved it. We liked how balanced the coffee and the cream tasted, how it wasn’t extra sugary. Nobody stopped at a single serving and everyone had a mild smile on their face after eating it. Many compliments and many thanks to you for getting this done so quickly and I can’t wait to reorder.",
     author: "Kanav Minocha",
   },
   {
@@ -45,7 +45,7 @@ export default function Reviews() {
     <section className="px-5 py-16 sm:px-8 md:px-10">
       <MaxContainer>
         <h4 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
-          reviews
+          Reviews
         </h4>
 
         <div className="relative">
@@ -58,7 +58,7 @@ export default function Reviews() {
             </div>
 
             <div className="flex-1">
-              <p className="mb-8 text-lg leading-relaxed">
+              <p className="mb-8 text-lg tracking-widest leading-relaxed normal-case">
                 {reviews[index].text}
               </p>
 

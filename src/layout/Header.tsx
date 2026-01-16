@@ -27,15 +27,17 @@ export default function Header() {
   const toggleSearch = () => setSearchActive(prev => !prev);
 
   // Handle search submit
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!searchText.trim()) return;
+  // In the Header component, modify the handleSearchSubmit function:
+const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  if (!searchText.trim()) return;
 
-    // Redirect to products page with query param
-    navigate(`/products/1?search=${encodeURIComponent(searchText)}`);
-    setSearchText("");
-    setSearchActive(false);
-  };
+  // Redirect to a dedicated search page
+  navigate(`/search?q=${encodeURIComponent(searchText)}`);
+  setSearchText("");
+  setSearchActive(false);
+  setShow(false); // Also close mobile menu if open
+};
 
   return (
     <header className="bg-[url('/nav-bg.webp')]">

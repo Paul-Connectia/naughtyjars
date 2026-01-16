@@ -78,6 +78,16 @@ const Login: React.FC = () => {
             {loading ? "Logging in..." : "Log In"}
           </button>
         </form>
+        <p className="text-sm text-center mt-4">
+  Not a member?{" "}
+  <span
+    onClick={() => navigate("/signup")}
+    className="text-[var(--color-purple)] font-medium cursor-pointer hover:underline"
+  >
+    Register here
+  </span>
+</p>
+
       </div>
     </div>
   );

@@ -7,16 +7,19 @@ import type { product } from "@/types/products";
 import dirham from "@/assets/UAE_Dirham_Symbol.svg";
 
 const ProductsPage: React.FC = () => {
-  const typeArr = ["large", "small", "box", "casserole"];
+  const typeArr = ["large", "small", "box", "casserole", "minis"]; // Changed from "mini" to "minis"
   const titleArr = [
     "Original Jars(250ml)",
     "Petite Jars(150ml)",
     "Combo Boxes",
     "Casseroles",
+    "Minis" // This is correct
   ];
 
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
+  console.log("Page ID:", id);
+  console.log("Expected type for this page:", typeArr[Number(id) - 1]);
 
   // Get search query from URL
   const searchParams = new URLSearchParams(location.search);
@@ -26,7 +29,7 @@ const ProductsPage: React.FC = () => {
   let products: product[] = data.filter(
     (product) => product.type === typeArr[Number(id) - 1]
   );
-
+console.log("Found product:", products.length);
   // Apply search filter if query exists
   if (searchQuery) {
     products = products.filter((p) => {

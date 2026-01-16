@@ -3,7 +3,7 @@ import Image from "../ui/Image";
 const teams = [
   {
     image: "/about/moona.jpg",
-    name: "Moona Menez",
+    name: "Moona Menezes",
     role: "Founder",
     message:
       "“Naughty jars was born out of my love for authentic Tiramisu made with quality ingredients. My search for a perfectly balanced tiramisu ended when I finally mastered the recipe after a year of experimenting. I am delighted to share this recipe in our carefully crafted jars of the classic tiramisu and a list of growing flavour variations”",

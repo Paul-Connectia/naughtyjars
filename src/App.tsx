@@ -3,24 +3,28 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import Login from "./pages/auth/login";
+
 import Cart from "./pages/Cart";
 import { CartProvider } from "./contexts/cartContext";
+import { SearchProvider } from "./contexts/searchContext";
 import 'react-toastify/dist/ReactToastify.css';
 
 // ✅ Lazy load components
 const Layout = lazy(() => import("@/layout/Layout"));
 const Home = lazy(() => import("./pages/Home"));
+const  Login =lazy(()=>import("./pages/auth/login"))
+const SignUp =lazy(()=>import("./pages/auth/signup"))
 const ProductsPage = lazy(() => import("@/pages/products/ProductsPage"));
 const ProductDetailPage = lazy(() => import("@/pages/products/ProductDetailPage"));
 const About = lazy(() => import("./pages/About"));
 const Blog = lazy(() => import("./pages/Blog"));
+const BlogDetail = lazy(() => import("./pages/BlogDetailPage")); // Update to the correct file name
 const AdminLayout = lazy(() => import("@/admin/layout/AdminLayout"));
 const AdminDashboard = lazy(() => import("@/admin/pages/Dashboard"));
 const CrewList = lazy(() => import("./admin/pages/CrewList"));
 const AddCrew = lazy(() => import("./admin/pages/AddCrew"));
 const Settings= lazy(()=>import("./admin/pages/Setting"))
-
+const SearchPage = lazy(() => import("./pages/SearchPage"));
 // ✅ Define routes
 const router = createBrowserRouter([
   {
@@ -31,8 +35,11 @@ const router = createBrowserRouter([
       { path: "/product/:slug", element: <ProductDetailPage /> },
       { path: "/about-us", element: <About /> },
       { path: "/blogs", element: <Blog /> },
+      {path: "/blog/:slug", element: <BlogDetail />},
       { path: "/login", element: <Login /> },
+      {path:"/signup", element:<SignUp/>},
       { path: "/cart", element: <Cart /> },
+      {path:"/search", element:<SearchPage/>}
     ],
   },
   {
@@ -53,7 +60,9 @@ export default function App() {
   return (
     <Suspense fallback={<div className="min-h-screen" />}>
       <CartProvider>
+        <SearchProvider>
         <RouterProvider router={router} />
+        </SearchProvider>
       </CartProvider>
     </Suspense>
   );

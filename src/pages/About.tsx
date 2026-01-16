@@ -41,7 +41,7 @@ export default function About() {
               Pure indulgence
             </p>
             <Image src="/about/2.avif" className="mt-5" />
-            <div className="-z-20 -mt-5 h-[200px] bg-[#EDEAAAff] sm:h-[350px] sm:p-5">
+            <div className="-z-20 -mt-5 h-[200px] bg-[#f1dab0] sm:h-[350px] sm:p-5">
               <Image src="/about/3.avif" className="h-full" />
             </div>
             <div className="-ml-10 flex h-fit flex-col bg-[#d2b58d] p-3 text-center text-xs sm:mt-40 sm:-ml-5 sm:h-40 sm:p-8 sm:text-xl">
@@ -56,9 +56,9 @@ export default function About() {
               Nothing less than perfection in every jar
             </p>
             <Image src="/about/4.avif" />
-            <Image src="/about/5.avif" className="-z-10" />
+            <Image src="/about/6.avif" className="-z-10" />
             <div className="relative">
-              <Image src="/about/6.avif" className="-z-10 -mt-10" />
+              <Image src="/about/5.avif" className="-z-10 -mt-10" />
               <div className="absolute bottom-2 left-5 -ml-20 w-40 bg-[#d2b58d] p-1 text-xs sm:ml-0 sm:p-5">
                 Flavors built to impress
               </div>

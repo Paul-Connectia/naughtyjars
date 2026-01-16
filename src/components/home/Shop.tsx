@@ -12,6 +12,11 @@ const dummyImages = [
     page: "/products/4",
     label: "Casserole",
   },
+  {
+    img: "/productpage/mini/DSCF6851.jpg",
+    page: "/products/5",
+    label: "Minis",
+  },
 ];
 
 const marqueeItems = [...dummyImages, ...dummyImages, ...dummyImages, ...dummyImages]; // Duplicate for smooth infinite effect

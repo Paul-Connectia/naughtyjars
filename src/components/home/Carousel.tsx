@@ -33,23 +33,79 @@ const slides: Slide[] = [
 ];
 
 const HEIGHT_CLASSES =
-  "h-[520px] w-full sm:h-[280px] md:h-[360px] lg:h-[450px] xl:h-[550px] 2xl:h-[650px]";
+  "h-[400px] w-full sm:h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[750px]";
 
 const Carousel: React.FC<Props> = ({ dashes = false }) => {
   const [index, setIndex] = useState<number>(0);
   const [preloadedSlides, setPreloadedSlides] = useState<number[]>([]);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const delay = 3000;
+  const [isMobile, setIsMobile] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const delay = 4000;
+  const [imageCache, setImageCache] = useState<Record<string, string>>({});
 
-  // Preload next slide images
+  // Preload ALL images aggressively on mount
   useEffect(() => {
-    const preloadImage = (src: string) => {
-      const img = new window.Image();
-      img.src = src;
+    const preloadAllImages = async () => {
+      const cache: Record<string, string> = {};
+      
+      const preloadSingleImage = (src: string) => {
+        return new Promise((resolve) => {
+          const img = new window.Image();
+          img.src = src;
+          img.onload = () => {
+            cache[src] = src;
+            resolve(true);
+          };
+          img.onerror = resolve; // Don't fail on error
+        });
+      };
+
+      const promises: Promise<unknown>[] = [];
+      
+      // Preload all slide images
+      slides.forEach(slide => {
+        if (slide.image) {
+          promises.push(preloadSingleImage(slide.image));
+        }
+        if (slide.images) {
+          slide.images.forEach(img => {
+            promises.push(preloadSingleImage(img));
+          });
+        }
+      });
+
+      await Promise.all(promises);
+      setImageCache(cache);
     };
 
-    // Preload current slide and next slide
-    const slidesToPreload = [index, (index + 1) % slides.length];
+    preloadAllImages();
+  }, []);
+
+  // Detect mobile once on client side
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Preload next slide images more aggressively
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      if (imageCache[src]) return; // Already cached
+      
+      const img = new window.Image();
+      img.src = src;
+      // Cache it
+      setImageCache(prev => ({ ...prev, [src]: src }));
+    };
+
+    // Preload current, next, and previous slides
+    const current = index;
+    const next = (index + 1) % slides.length;
+    const prev = index === 0 ? slides.length - 1 : index - 1;
+    
+    const slidesToPreload = [current, next, prev];
     
     slidesToPreload.forEach((slideIndex) => {
       if (!preloadedSlides.includes(slideIndex)) {
@@ -60,20 +116,20 @@ const Carousel: React.FC<Props> = ({ dashes = false }) => {
         }
         
         if (slide.images) {
-          // Only preload first 2 images on mobile, all on desktop
-          const imagesToPreload = window.innerWidth < 768 ? slide.images.slice(0, 2) : slide.images;
+          const imagesToPreload = isMobile ? slide.images.slice(0, 2) : slide.images;
           imagesToPreload.forEach(preloadImage);
         }
         
         setPreloadedSlides(prev => [...prev, slideIndex]);
       }
     });
-  }, [index]);
+  }, [index, preloadedSlides, isMobile, imageCache]);
 
   const resetTimeout = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
   };
 
+  // Auto-sliding
   useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(() => {
@@ -84,66 +140,89 @@ const Carousel: React.FC<Props> = ({ dashes = false }) => {
   }, [index]);
 
   return (
-    <div className="relative w-full overflow-hidden shadow-lg">
+    <div className="group relative w-full overflow-hidden bg-slate-100 shadow-2xl">
+      {/* Slider Container */}
       <div
-        className="flex transition-transform duration-700 ease-in-out"
+        className="flex transition-transform duration-1000 cubic-bezier(0.4, 0, 0.2, 1)"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {slides.map((slide, slideIndex) => (
-          <div key={slide.id} className="w-full flex-shrink-0">
-            {/* SINGLE IMAGE SLIDE */}
-            {slide.image && (
-              <Image
-                src={slide.image}
-                alt={slide.text}
-                loading={slideIndex === index ? "eager" : "lazy"}
-                className={`${HEIGHT_CLASSES} object-cover`}
-              />
-            )}
+        {slides.map((slide, slideIndex) => {
+          const isCurrent = slideIndex === index;
+          const isNext = slideIndex === (index + 1) % slides.length;
+          const isPrev = slideIndex === (index === 0 ? slides.length - 1 : index - 1);
+          
+          // More aggressive loading: current, next, and previous slides get eager loading
+          const loadPriority = (isCurrent || isNext || isPrev) ? "eager" : "lazy";
+          const fetchPriority = isCurrent ? "high" : (isNext || isPrev) ? "auto" : "low";
 
-            {/* MERGED IMAGE SLIDE */}
-            {slide.images && (
-              <div
-                className={`
-                  grid grid-cols-2
-                  md:grid-cols-4
-                  ${HEIGHT_CLASSES}
-                `}
-              >
-                {slide.images.map((img, i) => (
-                  <Image
-                    key={i}
-                    src={img}
-                    alt={`${slide.text} ${i + 1}`}
-                    // Only load eagerly for current slide and first 2 images on mobile
-                    loading={
-                      slideIndex === index 
-                        ? (window.innerWidth < 768 && i < 2 ? "eager" : "lazy")
-                        : "lazy"
-                    }
-                    className={`
-                      w-full h-full object-cover
-                      ${i >= 2 ? "hidden md:block" : ""}
-                    `}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+          return (
+            <div key={slide.id} className="w-full flex-shrink-0 relative">
+              
+              {/* Overlay Gradient */}
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+
+              {/* SINGLE IMAGE SLIDE */}
+              {slide.image && (
+                <Image
+                  src={slide.image}
+                  alt={slide.text}
+                  loading={loadPriority}
+                  fetchPriority={fetchPriority}
+                  className={`${HEIGHT_CLASSES}`}
+                  // Add decoding hint for better performance
+                  decoding="async"
+                />
+              )}
+
+              {/* MERGED IMAGE SLIDE */}
+              {slide.images && (
+                <div
+                  className={`
+                    grid grid-cols-2
+                    md:grid-cols-4
+                    gap-px
+                    bg-slate-200
+                    ${HEIGHT_CLASSES}
+                  `}
+                >
+                  {slide.images.map((img, i) => (
+                    <Image
+                      key={i}
+                      src={img}
+                      alt={`${slide.text} ${i + 1}`}
+                      // Aggressive loading for current and adjacent slides
+                      loading={(isCurrent || isNext || isPrev) ? "eager" : "lazy"}
+                      fetchPriority={isCurrent && i < 2 ? "high" : "auto"}
+                      decoding="async"
+                      className={`
+                        w-full h-full object-cover
+                        ${i >= 2 ? "hidden md:block" : ""}
+                      `}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
-      {/* Dots */}
+      {/* Navigation Dashes */}
       {dashes && (
-        <div className="mt-4 flex justify-center space-x-2">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-3 z-30">
           {slides.map((_, i) => (
             <button
               key={i}
-              onClick={() => setIndex(i)}
-              className={`h-3 w-3 rounded-full transition-all ${
-                index === i ? "bg-gray-800" : "bg-gray-400"
-              }`}
-            />
+              onClick={() => { resetTimeout(); setIndex(i); }}
+              className={`group/dot relative h-1 transition-all duration-500 ease-out focus:outline-none ${
+                index === i 
+                ? "w-12 bg-white" 
+                : "w-6 bg-white/40 hover:bg-white/60"
+              } rounded-full`}
+            >
+             
+            </button>
           ))}
         </div>
       )}

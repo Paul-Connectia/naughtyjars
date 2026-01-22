@@ -1,6 +1,7 @@
 import { createCrew } from "@/api/crewApi";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"; // Add this import
 
 interface CrewForm {
   name: string;
@@ -18,6 +19,8 @@ const AddCrew = () => {
     contact: "",
     status: "active",
   });
+  
+  const navigate = useNavigate(); // Add this hook
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -27,36 +30,51 @@ const AddCrew = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const token = localStorage.getItem("token"); // or from context
-    if (!token) {
-      toast.error("Please login first");
-      return;
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Please login first");
+        return;
+      }
+
+      await createCrew(formData, token);
+
+      toast.success("Crew member added successfully!");
+
+      // Reset form
+      setFormData({
+        name: "",
+        position: "",
+        email: "",
+        contact: "",
+        status: "active",
+      });
+      
+      // Optionally navigate back after successful addition
+      // navigate("/admin/crew");
+      
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.message || "Failed to add crew member"
+      );
     }
-
-    await createCrew(formData, token);
-
-    toast.success("Crew member added successfully!");
-
-    setFormData({
-      name: "",
-      position: "",
-      email: "",
-      contact: "",
-      status: "active",
-    });
-  } catch (error: any) {
-    toast.error(
-      error.response?.data?.message || "Failed to add crew member"
-    );
-  }
-};
+  };
 
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-semibold mb-6">Add Crew Member</h2>
+      <div className="flex justify-between items-center mb-6"> {/* Added flex container */}
+        <h2 className="text-2xl font-semibold">Add Crew Member</h2>
+        {/* Back to List button */}
+        <button
+          type="button"
+          onClick={() => navigate("/admin/crew")}
+          className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+        >
+          ← Back to List
+        </button>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Name */}
@@ -128,13 +146,24 @@ const AddCrew = () => {
           </select>
         </div>
 
-        {/* Submit */}
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
-        >
-          Add Crew
-        </button>
+        {/* Submit buttons container */}
+        <div className="flex gap-3 pt-3">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Add Crew
+          </button>
+          
+          {/* Optional: Add Cancel button next to submit */}
+          <button
+            type="button"
+            onClick={() => navigate("/admin/crew")}
+            className="bg-gray-300 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-400 transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

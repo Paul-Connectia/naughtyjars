@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { deleteCrew, getAllCrew } from "@/api/crewApi";
+import { Link } from "react-router";
 
 interface Crew {
   _id: string;
@@ -28,7 +29,7 @@ const CrewList = () => {
 
   const handleDelete = async (id: string) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this crew?"
+      "Are you sure you want to delete this crew?",
     );
     if (!confirmDelete) return;
 
@@ -49,9 +50,16 @@ const CrewList = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Crew List</h2>
-
-      <table className="w-full border-collapse bg-white shadow rounded-lg overflow-hidden">
+      <h2 className="mb-4 text-2xl font-bold">Crew List</h2>
+      <div className="flex justify-end">
+      <Link
+        to="/admin/crew/add"
+        className=" rounded bg-[#75398f] px-4 py-2 text-white hover:bg-[#f5deff] hover:text-[#75398f] "
+      >
+        + Add New Crew
+      </Link>
+      </div>
+      <table className="mt-10 w-full border-collapse overflow-hidden rounded-lg bg-white shadow">
         <thead>
           <tr className="bg-gray-200 text-left">
             <th className="p-3">ID</th>
@@ -70,7 +78,7 @@ const CrewList = () => {
               <td className="p-3">
                 <button
                   onClick={() => handleDelete(crew._id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                  className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
                 >
                   Delete
                 </button>

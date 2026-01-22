@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import Image from "@/components/ui/Image";
 import Pagination from "@/components/products/Pagination";
-import { getProductsByType } from "@/api/products";
-import type { product } from "@/types/products";
+import { getAllProducts } from "@/api/products";
+import type { product } from "@/types/products"; // Change Product to product
 import dirham from "@/assets/UAE_Dirham_Symbol.svg";
 
 const ProductsPage: React.FC = () => {
@@ -18,7 +18,7 @@ const ProductsPage: React.FC = () => {
 
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  const [products, setProducts] = useState<product[]>([]);
+  const [products, setProducts] = useState<product[]>([]); // Change Product[] to product[]
   const [loading, setLoading] = useState(true);
 
   // Get search query from URL
@@ -29,7 +29,10 @@ const ProductsPage: React.FC = () => {
     const fetchProducts = async () => {
       setLoading(true);
       const type = typeArr[Number(id) - 1];
-      const fetchedProducts = await getProductsByType(type);
+      const allProducts = await getAllProducts(); // Get ALL products
+
+      // Filter by type
+      const fetchedProducts = allProducts.filter(product => product.type === type);
 
       // Apply search filter if query exists
       const filteredProducts = searchQuery

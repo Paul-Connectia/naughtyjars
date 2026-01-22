@@ -7,7 +7,6 @@ import {
 import { CartProvider } from "./contexts/cartContext";
 import { SearchProvider } from "./contexts/searchContext";
 import 'react-toastify/dist/ReactToastify.css';
-
 // Lazy load components
 const Layout = lazy(() => import("@/layout/Layout"));
 const Home = lazy(() => import("./pages/Home"));
@@ -16,15 +15,19 @@ const SignUp = lazy(() => import("./pages/auth/signup"));
 const ProductsPage = lazy(() => import("@/pages/products/ProductsPage"));
 const ProductDetailPage = lazy(() => import("@/pages/products/ProductDetailPage"));
 const About = lazy(() => import("./pages/About"));
+const SearchPage = lazy(() => import("./pages/SearchPage"));
+
 const Blog = lazy(() => import("./pages/Blog"));
+
 const BlogDetail = lazy(() => import("./pages/BlogDetailPage"));
 const AdminLayout = lazy(() => import("@/admin/layout/AdminLayout"));
 const AdminDashboard = lazy(() => import("@/admin/pages/Dashboard"));
 const CrewList = lazy(() => import("./admin/pages/CrewList"));
 const AddCrew = lazy(() => import("./admin/pages/AddCrew"));
-const Settings = lazy(() => import("./admin/pages/Setting"));
 const Cart = lazy(() => import("./pages/Cart"));
-const SearchPage = lazy(() => import("./pages/SearchPage"));
+const ProductsPageAdmin = lazy(() => import("./admin/pages/ProductPage"));
+const BlogPageAdmin = lazy(() => import("./admin/pages/BLogAdmin"));
+const TestimonialPage = lazy(() => import("./admin/pages/TestimonialPage"));
 
 // Define User type
 interface User {
@@ -59,7 +62,9 @@ if (loading) {
             ? [
                 { path: "crew", element: <CrewList /> },
                 { path: "crew/add", element: <AddCrew /> },
-                { path: "settings", element: <Settings /> },
+                {path: "products", element: <ProductsPageAdmin />},
+                {path: "blogs", element: <BlogPageAdmin />},
+                {path: "testimonials", element: <TestimonialPage />},
               ]
             : []),
         ],

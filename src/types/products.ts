@@ -34,12 +34,14 @@ export interface Blog {
 }
 
 export interface Testimonial {
-  id: string;
+  _id: string;
   name: string;
   content: string;
   rating: number;
   date: string;
   createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 export type UserRole = 'admin' | 'crew';

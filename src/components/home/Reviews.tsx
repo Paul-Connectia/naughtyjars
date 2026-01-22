@@ -1,29 +1,31 @@
 import MaxContainer from "@/layout/MaxContainer";
 import { useEffect, useRef, useState } from "react";
 import Image from "../ui/Image";
-
-const reviews = [
-  {
-    id: 1,
-    content: "Serradura is a Portuguese dessert made with layers of crushed biscuits and sweet cream, creating a delightful, creamy, and crunchy treat. This one was amazingly made by Naughty Jars",
-    name: "Anu Eliza",
-  },
-  {
-    id: 2,
-    content: "I just served the tiramisu to my guests. They loved it. We liked how balanced the coffee and the cream tasted, how it wasn’t extra sugary. Nobody stopped at a single serving and everyone had a mild smile on their face after eating it. Many compliments and many thanks to you for getting this done so quickly and I can’t wait to reorder.",
-    name: "Kanav Minocha",
-  },
-  {
-    id: 3,
-    content: "The best tiramisu in the whole of UAE",
-    name: "Ketaki Golatkar",
-  },
-];
+import { getAllTestimonials } from "@/api/testimonals";
+import type { Testimonial } from "@/types/products";
 
 export default function Reviews() {
+  const [reviews, setReviews] = useState<Testimonial[]>([]);
   const [index, setIndex] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const delay = 3000; // 3 seconds
+
+  // Fetch testimonials from API
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const data = await getAllTestimonials();
+        setReviews(data);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchTestimonials();
+  }, []);
 
   const resetTimeout = (): void => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -31,6 +33,8 @@ export default function Reviews() {
 
   // Automatic slide effect
   useEffect(() => {
+    if (reviews.length === 0) return;
+    
     resetTimeout();
     timeoutRef.current = setTimeout(() => {
       setIndex((prevIndex) =>
@@ -39,7 +43,37 @@ export default function Reviews() {
     }, delay);
 
     return () => resetTimeout();
-  }, [index]);
+  }, [index, reviews.length]);
+
+  if (loading) {
+    return (
+      <section className="px-5 py-16 sm:px-8 md:px-10">
+        <MaxContainer>
+          <h4 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
+            Reviews
+          </h4>
+          <div className="flex justify-center py-12">
+            <div className="text-gray-500">Loading reviews...</div>
+          </div>
+        </MaxContainer>
+      </section>
+    );
+  }
+
+  if (reviews.length === 0) {
+    return (
+      <section className="px-5 py-16 sm:px-8 md:px-10">
+        <MaxContainer>
+          <h4 className="text-gray mb-6 text-3xl md:text-4xl lg:text-5xl">
+            Reviews
+          </h4>
+          <div className="flex justify-center py-12">
+            <div className="text-gray-500">No reviews yet.</div>
+          </div>
+        </MaxContainer>
+      </section>
+    );
+  }
 
   return (
     <section className="px-5 py-16 sm:px-8 md:px-10">
@@ -82,10 +116,11 @@ export default function Reviews() {
               <button
                 key={idx}
                 onClick={() => setIndex(idx)}
-                className={`h-1 cursor-pointer transition-all duration-300 ${index === idx
-                  ? "w-16 bg-purple-600"
-                  : "w-12 bg-stone-400"
-                  }`}
+                className={`h-1 cursor-pointer transition-all duration-300 ${
+                  index === idx
+                    ? "w-16 bg-purple-600"
+                    : "w-12 bg-stone-400"
+                }`}
                 aria-label={`Go to review ${idx + 1}`}
               />
             ))}
